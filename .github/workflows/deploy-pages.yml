@@ -1,0 +1,35 @@
+name: Deploy prototype to GitHub Pages
+
+# 目的：给国内用户一个比 *.vercel.app 更容易打开的对外地址（Vercel 仍保留作镜像）。
+# prototype/ 本身即完整静态站点（零依赖、无构建），直接整目录上传即可。
+on:
+  push:
+    branches: [main]
+    paths:
+      - "prototype/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: prototype
+      - id: deployment
+        uses: actions/deploy-pages@v4

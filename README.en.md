@@ -1,70 +1,86 @@
-# ORCA Governance Template, Distribution Edition · Navigation (read me first)
+# Mahjong Quick Guide 麻将小白助手
 
-[简体中文](./README.md)
+[中文](./README.md)
 
-> The template name is frozen; the source of truth for versions is this repository's Git history (the version marker file is only a pointer).
+A quick-reference guide to **Hainan mahjong** rules, built for people who have never played. Every rule comes with real tile faces, so you can pick it up before sitting down at the table.
 
-Single canonical read order at the start of work: `AGENTS.md` → `docs/roles/` (the role cards for this run) → root `USER_MODEL_OVERRIDE.md` (the model table; use it if present) → `docs/handoff/` (current handover state) → root `经验一句话.md` → and the task goal last.
+<p align="center">
+  <img src="docs/assets/readme/home.png" width="200" alt="Home: common questions and small tools">
+  <img src="docs/assets/readme/qwin.png" width="200" alt="When can I win: hand structure, the pair, fan and the four conditions, all with tile faces">
+  <img src="docs/assets/readme/seat.png" width="200" alt="Seat table: name the four seats, pick the dealer, rotate each round">
+</p>
 
-## The system at a glance
+## What this is
 
-**Two-phase governance flow** (command-driven; the Human Gate cannot be crossed automatically; Change C closes the loop):
+A quick-reference teaching tool for **Hainan mahjong** rules, made for complete beginners.
 
-![ORCA two-phase governance flow](./docs/assets/orca-two-phase-flow.png)
+It is not a full encyclopedia of scoring patterns. It answers the things that actually block you before your first game:
 
-**Roles and the Phase 2 dispatch chain** (9 + 1 + 1; auto-detected dispatch port; ledgers and the three-step sync):
+- **When can this hand win?**
+- **Why can't this hand win?**
+- What do people mean by *sequence*, *triplet*, *pung*, *chow*, *kong*, *ready hand* and *flower tile*?
 
-![ORCA roles and dispatch chain](./docs/assets/orca-roles-dispatch-chain.png)
+Every rule is shown with **real tile faces**, and each term is explained in plain language the first time it appears.
 
-## The user only needs three commands
+## What it does
 
-- `第一阶段，计划` (phase 1, plan): enters Phase 1 (PLAN); Planner plus Research Reviewer produce the PRODUCT_PLAN, and only when the score is ≥90 and every template gate condition holds (P0 = 0, blocking P1 = 0, facts and assumptions verified) does it come back to you.
-- `第二阶段，开发` (phase 2, develop): after Human Gate approval, enters Phase 2 (DEVELOP) with DEV_BASELINE locked; the default main chain does the work (models per the override table).
-- `变更请求：……` (change request): the single entry point for feedback during development; the TM classifies it as A (small change, stays in DEVELOP), B (local functional change, stays in DEVELOP without recalling Sol) or C (product or architecture change, Controlled Reopen).
+| Feature | Description |
+|---|---|
+| When can I win | One page: the winning shape (four groups + one pair), what the "eye" (the pair) is, what "fan" does, and the four Hainan conditions — the pair is 2/5/8, your seat matches your flowers, winds or dragons form a triplet, and fan decides whether you can win off a discard |
+| Why can't I win | Walks through concrete hands: the difference between 13 and 14 tiles, an invalid shape, and unmet conditions |
+| 8 real hands | Each hand gets a can/cannot-win verdict, the reason, what it is missing, and the next step; flower tiles are kept apart from the hand |
+| Glossary | Sequence, triplet, pung, chow, kong, ready hand, flower tile, missing suit… each with real tile faces |
+| Seat table (tool) | Name the four seats, tap who is the dealer, and see how the winds rotate round by round |
+| Table screen (tool) | Cast seats and winds to a big screen so all four players can see |
 
-## Model policy (one line)
+Plus:
 
-Models, channels and invocation methods **always follow the root `USER_MODEL_OVERRIDE.md` table** (the single source; changing the table requires a real call, and exact IDs are copied verbatim). This README deliberately does not restate model IDs, to avoid drifting from the table. To swap a model the user edits the master table directly; **the table's two backup columns (backup model / backup execution channel) are authoritative** — a backup is used only on main-channel timeout or quota exhaustion, and DISPATCH still records `used` as the main one with the reason in `note`. Assignment tables use symlinks: every project's root table points at the master source, so editing the master propagates to all projects (never copy the file; if the link breaks across machines, copy the real file and record it in HANDOFF).
+- **Bilingual** (Simplified Chinese / English), with a follow-system language option that falls back to Simplified Chinese.
+- **Light / dark / follow-system** themes; switching never loses the page you are on.
+- **Installable and offline**: add it to your phone's home screen and it opens like an app, even with no network.
+- **Zero dependencies, zero network calls**: plain static pages, no framework and no build step — you can open `index.html` by double-clicking it.
 
-## Root directory
+## Getting Started
 
-- `AGENTS.md`: rules for everyone (one page)
-- `USER_MODEL_OVERRIDE.md`: the model table (role / model / execution channel / invocation; edit the table and it takes effect, exact IDs copied verbatim)
-- `GOVERNANCE_VERSION`: version pointer (its content says: Git history is authoritative)
-- `经验一句话.md`: one lesson captured at the end of each session
-- `scripts/orchestration/`: L3 watchdog scripts plus deployment notes (anti-stall, paired with the continuous-progress protocol in `docs/prompts/`; deploy only when orchestrating from an Orca terminal or an external channel)
-- this `README.md`: navigation; the table in `USER_MODEL_OVERRIDE.md` is itself the model-switching policy (no rules live outside it)
+### Option 1: open the hosted version (recommended, works on phones)
 
-## Map of docs/
+<https://p046-mahjong-guide.vercel.app/index.html>
 
-- `roles/`: 11 role cards (read only the role you are dispatching)
-- `prompts/`: three prompts — orchestrator / external developer / migration-and-tidy (the last doubles as the single entry point for legacy projects, with self-bootstrap: each run pulls the package from the local governance repository itself, so nothing has to be copied by hand and an existing governance layer never causes it to be skipped), plus the *Orca general orchestrator continuous-progress protocol* (three-layer supervision, consolidated edition; its dynamic-role theory conflicts with the ten-card system and is not adopted) and the *Orca governance supervisor prompt* (grand-supervisor, wake-only, normally it only calls the orchestrator)
-- `history/`: reshape notes, update notes, the ORCA model and two-phase governance remediation plan (historical — read the root files for what is current)
-- `templates/`: the filing-map template
-- `pm/` `qa/` `review/`: plans, tests and reviews written to disk (each following its template)
-- `handoff/`: handover (template included); `model/`: the model ledger (delete the example row before the first real TASK entry and before the first real DISPATCH) plus the TM qualification test (`TASK-MANAGER-QUALIFICATION.md` spec and report, `TASK-MANAGER-QUALIFICATION-EVENTS.jsonl` events, scored by `scripts/model/tm-qualification.mjs`)
-- `sop/`: infrastructure standards (docker.md, supabase.md, sqlite.md, android.md, android-machine-profile.md, webqa.md, decision-router.md, **app-theme-i18n.md** (APP baseline: theme three-state + zh-CN/en), background-services.md, referenced without version numbers); new projects create their own
-- `scripts/decision/`: the Decision Sidecar `orca-decide` (usage in its own README and `docs/sop/decision-router.md`)
+On a phone you can use "Add to Home Screen" and then open it like an app, offline included.
 
-## Deleted (on the user's instruction; every conclusion was implemented)
+### Option 2: run it locally
 
-- Six historical governance review reports (09-09 → 09-11): all P1/P2 conclusions were fixed and verified; their pre-deletion state is in Git history, and current conclusions live in the files inside the package
-- `docs/model/模型分工工作量排名-2026-09-13-参考.md` (removed 2026-09-15; the snapshot had gone stale, see Git history)
-- Loose root files were filed: three prompts → `prompts/`, two notes → `history/`, the filing map → `templates/`
+```bash
+cd prototype
+python3 -m http.server 8080
+# then open http://localhost:8080/
+```
 
-## Rename table (one pass that dropped version numbers; use it to find old links)
+You can also double-click `prototype/index.html` (a `file://` page). All content still works; only offline caching and "install to desktop" need an `http(s)` origin.
 
-- `docs/history/2.0-重塑说明.md` → `docs/history/重塑说明.md`
-- `docs/history/2.1-更新说明.md` → `docs/history/更新说明.md`
-- `docs/history/ORCA-V2.1-治理审查报告-*` → `docs/history/ORCA-治理审查报告-*` (files since deleted, see Git history)
-- `docs/history/*ORCA V2.1模型与双阶段治理-整改方案 丨 V1.0.md` → `docs/history/*ORCA模型与双阶段治理-整改方案.md`
-- `docs/prompts/*持续推进协议 丨 V1.1.md` → `Orca 通用编排者持续推进协议.md`
-- `docs/sop/*交接上下文 丨 V1.0.md` → trailing ` 丨 V1.0` removed (file since deleted, see Git history)
-- Command `【迁移整理｜2.1】` → `【迁移整理】`
-- Command `【编排者｜2.1开工】` → `【编排者｜开工】`
-- Command `【外部施工｜2.1】` → `【外部施工】`
+## Scope and limitations
 
-## Ready-to-use packages
+- Only **Hainan mahjong** is covered; other regional rule sets are not included in this version.
+- **Not a hand-evaluation engine**: it does not judge arbitrary hands live. It presents 8 reviewed static examples (E01–E07, E16).
+- Rules come from public sources and local play; tables differ, so **ask at your own table**. Sources and evidence grades are listed in the in-app "About" page.
+- No betting, scoring, or gambling features of any kind.
+- Tile images are PNG, so extreme zoom levels look soft.
 
-- `新项目模板包/`: the complete file set needed to initialise a new project.
-- `老项目迁移模板包/`: the complete file set needed to migrate a legacy project; the entry point is the `【迁移整理】` prompt (self-bootstrapping: it fetches the package from the local governance repository every run, so nothing needs copying by hand, and it will not skip a project that already has governance files).
+## Technical notes
+
+- Plain static site: `index.html` + `app.js` + `app.css` + `i18n.js` + `data/*.js`. No framework, no build, no external links.
+- Data is duplicated on purpose: `data/rules.js` and `data/examples.js` are the runtime source, `data/*.json` the record source. Change both together and keep them JSON-equivalent.
+- PWA: `manifest.webmanifest` + `sw.js`; `SW_VERSION` controls the cache version, and the page reloads itself once a new version takes over.
+- Deployment: `prototype/` is a complete static site and can be hosted anywhere (this project uses Vercel).
+
+## Layout
+
+| Path | Contents |
+|---|---|
+| `prototype/` | The product itself: the runnable, installable, offline static site |
+| `docs/pm/` | Product plan, UX contract, design freeze draft |
+| `docs/qa/` | Product acceptance tracking matrix |
+| `docs/plan/` | Handoff package and brand assets |
+| `docs/handoff/` | Project status and handoff notes |
+
+> Files such as `AGENTS.md`, `docs/roles/` and `docs/sop/` at the repository root are development and governance conventions. They are unrelated to using the product and can be ignored.

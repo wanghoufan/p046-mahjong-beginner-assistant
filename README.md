@@ -44,7 +44,9 @@
 
 ### 方式一：直接打开线上版（推荐，手机也能用）
 
-<https://p046-mahjong-guide.vercel.app/index.html>
+<https://wanghoufan.github.io/p046-mahjong-beginner-assistant/>
+
+国内网络下这个地址比 `*.vercel.app` 更容易打开；Vercel 镜像保留在 <https://p046-mahjong-guide.vercel.app/index.html>。
 
 手机上打开后可以「添加到主屏幕」，之后像 App 一样用，断网也能看。
 

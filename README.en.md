@@ -44,7 +44,9 @@ Plus:
 
 ### Option 1: open the hosted version (recommended, works on phones)
 
-<https://p046-mahjong-guide.vercel.app/index.html>
+<https://wanghoufan.github.io/p046-mahjong-beginner-assistant/>
+
+This address is more reachable than `*.vercel.app` on mainland China networks; a Vercel mirror stays at <https://p046-mahjong-guide.vercel.app/index.html>.
 
 On a phone you can use "Add to Home Screen" and then open it like an app, offline included.
 

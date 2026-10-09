@@ -4,7 +4,7 @@ name_zh: 麻将小白助手
 slug: mahjong-beginner-assistant
 status: ing
 github: wanghoufan/p046-mahjong-beginner-assistant
-visibility: private
+visibility: public
 created_at: 2026-10-09T00:04:52+08:00
 local_path: /Users/zzymima0000/Developer/coding/1.Active/046-ing-麻将小白助手
 default_branch: main

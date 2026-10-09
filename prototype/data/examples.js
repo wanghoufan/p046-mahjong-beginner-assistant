@@ -1,0 +1,259 @@
+/* Runtime mirror of data/examples.json for file:// offline use (fetch/XHR is blocked on file://).
+   【双份维护警示 / DUAL-MAINTENANCE WARNING】data/examples.js 是运行期真源（页面实际加载的那份），data/examples.json 是规范记录源（QA/开发查看用）。改数据必须同步两处：任何一边改动都要在另一边写入同样内容，保持两边 JSON 内容等价，否则会出现「QA 看 json 对、线上跑 js 错」。 data/examples.js is the runtime truth the page loads; data/examples.json is the record source. Update BOTH files together and keep them JSON-equivalent. */
+window.P046_EXAMPLES = {
+  "_sync_warning": "【双份维护警示 / DUAL-MAINTENANCE WARNING】data/examples.js 是运行期真源（页面实际加载的那份），data/examples.json 是规范记录源（QA/开发查看用）。改数据必须同步两处：任何一边改动都要在另一边写入同样内容，保持两边 JSON 内容等价，否则会出现「QA 看 json 对、线上跑 js 错」。 data/examples.js is the runtime truth the page loads; data/examples.json is the record source. Update BOTH files together and keep them JSON-equivalent.",
+  "version": "1.2",
+  "date": "2026-10-09",
+  "note": "Norm from docs/plan/P046-V1.2/examples/visual-examples.json. IDs, status semantics, tile IDs and hand order kept stable. state = FR-04 four-state bucket per PRODUCT_PLAN_V1.0 Data/API acceptance table. 本文件现只收录海南档与通用结构牌例（E01–E07、E16）。",
+  "legend": {
+    "W": "万",
+    "P": "筒",
+    "S": "条",
+    "Z": "风/箭",
+    "F": "花"
+  },
+  "notice": "均为有定义前提的静态教学示例，不是自动牌局判定程序；只覆盖海南常见玩法，具体以自己那桌的规矩为准。",
+  "examples": [
+    {
+      "id": "E01",
+      "profile_id": "COMMON",
+      "title": "13张等待另一张二条",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2"
+      ],
+      "status": "WAITING",
+      "state": "conditional",
+      "tile_count": 13,
+      "explanation": "四组三张组合已齐，末尾只有一张二条；摸到另一张二条后，形成基础的4组+1对。",
+      "next_condition": "DRAW_S2",
+      "context": {}
+    },
+    {
+      "id": "E02",
+      "profile_id": "COMMON",
+      "title": "14张普通结构完整",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "STRUCTURE_VALID",
+      "state": "conditional",
+      "tile_count": 14,
+      "explanation": "四组为123万/456万/789万/111筒，二条一对为眼；不代表所有玩法都一定能胡。",
+      "next_condition": "CHECK_LOCAL_GATE",
+      "context": {}
+    },
+    {
+      "id": "E03",
+      "profile_id": "COMMON",
+      "title": "14张末尾无对子",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S5"
+      ],
+      "status": "STRUCTURE_INVALID",
+      "state": "cannot",
+      "tile_count": 14,
+      "explanation": "最后二条、五条不相同，且此副牌无法另作普通四组一对。当前已是14张，不可只说“再摸一张就胡”。",
+      "next_condition": "DISCARD_RESTRUCTURE",
+      "context": {}
+    },
+    {
+      "id": "E04",
+      "profile_id": "HN_FAN_REFERENCE",
+      "title": "二条做眼，提供一种番",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "QUALIFIED_CONDITIONAL",
+      "state": "can",
+      "tile_count": 14,
+      "explanation": "在所引海南有番玩法中，二条一对是二五八眼，符合资料列出的番种；是否能以点炮胡仍以所选桌规为准。",
+      "next_condition": "CONDITIONAL_DISCARD_WIN",
+      "context": {
+        "open_melds": [
+          "P1,P1,P1"
+        ],
+        "seat": "东",
+        "bonus_flower": null,
+        "additional_fan": false
+      }
+    },
+    {
+      "id": "E05",
+      "profile_id": "HN_FAN_REFERENCE",
+      "title": "三条做眼，未必能接炮",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S3",
+        "S3"
+      ],
+      "status": "FAN_NOT_SHOWN",
+      "state": "conditional",
+      "tile_count": 14,
+      "explanation": "明碰111筒、没有对应花牌/风箭刻子、非清一色、非全顺子时，三条眼本身不构成二五八番；在这个限定版本下普通点炮条件未满足，自摸另论。",
+      "next_condition": "GET_VALID_FAN_OR_SELFDRAW",
+      "context": {
+        "open_melds": [
+          "P1,P1,P1"
+        ],
+        "bonus_flower": null,
+        "additional_fan": false
+      }
+    },
+    {
+      "id": "E06",
+      "profile_id": "HN_FAN_REFERENCE",
+      "title": "东位春花算番，不等于当眼",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S3",
+        "S3"
+      ],
+      "status": "QUALIFIED_CONDITIONAL",
+      "state": "can",
+      "tile_count": 14,
+      "explanation": "限定东位拿春花；春花是额外摆出的花牌，补花后仍用14张组成普通结构；本案例眼仍是三条一对。",
+      "next_condition": "FLOWER_ADDS_FAN_NOT_PAIR",
+      "context": {
+        "open_melds": [
+          "P1,P1,P1"
+        ],
+        "seat": "东",
+        "bonus_flower": "F1"
+      }
+    },
+    {
+      "id": "E07",
+      "profile_id": "HN_FAN_REFERENCE",
+      "title": "非对应座位花牌，不自动算番",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S3",
+        "S3"
+      ],
+      "status": "FAN_NOT_SHOWN",
+      "state": "conditional",
+      "tile_count": 14,
+      "explanation": "南位拿春花时，这张花不按来源中“对应座位花牌”获得番；若没有其他番，不能据此宣称能点炮胡。",
+      "next_condition": "ASK_TABLE_RULE",
+      "context": {
+        "open_melds": [
+          "P1,P1,P1"
+        ],
+        "seat": "南",
+        "bonus_flower": "F1",
+        "additional_fan": false
+      }
+    },
+    {
+      "id": "E16",
+      "profile_id": "COMMON",
+      "title": "眼不是任意两张数字相近的牌",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S3",
+        "S3"
+      ],
+      "status": "STRUCTURE_VALID",
+      "state": "conditional",
+      "tile_count": 14,
+      "explanation": "末尾三条+三条为相同对子，是普通结构中的眼；眼的数字不一定只能是二五八，海南的二五八还涉及地方“有番”条件。",
+      "next_condition": "DISTINGUISH_PAIR_VS_FAN",
+      "context": {}
+    }
+  ]
+};

@@ -1,0 +1,449 @@
+{
+  "version": "1.2",
+  "date": "2026-10-09",
+  "legend": {
+    "W": "万",
+    "P": "筒",
+    "S": "条",
+    "Z": "风/箭",
+    "F": "花"
+  },
+  "notice": "均为有定义前提的静态教学示例，不是自动牌局判定程序；地区不同必须同时显示具体玩法与上下文。",
+  "examples": [
+    {
+      "id": "E01",
+      "profile_id": "COMMON",
+      "title": "13张等待另一张二条",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2"
+      ],
+      "status": "WAITING",
+      "explanation": "四组三张组合已齐，末尾只有一张二条；摸到另一张二条后，形成基础的4组+1对。",
+      "next_condition": "DRAW_S2",
+      "context": {}
+    },
+    {
+      "id": "E02",
+      "profile_id": "COMMON",
+      "title": "14张普通结构完整",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "STRUCTURE_VALID",
+      "explanation": "四组为123万/456万/789万/111筒，二条一对为眼；不代表所有玩法都一定能胡。",
+      "next_condition": "CHECK_LOCAL_GATE",
+      "context": {}
+    },
+    {
+      "id": "E03",
+      "profile_id": "COMMON",
+      "title": "14张末尾无对子",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S5"
+      ],
+      "status": "STRUCTURE_INVALID",
+      "explanation": "最后二条、五条不相同，且此副牌无法另作普通四组一对。当前已是14张，不可只说“再摸一张就胡”。",
+      "next_condition": "DISCARD_RESTRUCTURE",
+      "context": {}
+    },
+    {
+      "id": "E04",
+      "profile_id": "HN_FAN_REFERENCE",
+      "title": "海南：二条做眼提供一种番",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "QUALIFIED_CONDITIONAL",
+      "explanation": "在所引海南有番玩法中，二条一对是二五八眼，符合资料列出的番种；是否能以点炮胡仍以所选桌规为准。",
+      "next_condition": "CONDITIONAL_DISCARD_WIN",
+      "context": {
+        "open_melds": [
+          "P1,P1,P1"
+        ],
+        "seat": "东",
+        "bonus_flower": null,
+        "additional_fan": false
+      }
+    },
+    {
+      "id": "E05",
+      "profile_id": "HN_FAN_REFERENCE",
+      "title": "海南：三条做眼未必能接炮",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S3",
+        "S3"
+      ],
+      "status": "FAN_NOT_SHOWN",
+      "explanation": "明碰111筒、没有对应花牌/风箭刻子、非清一色、非全顺子时，三条眼本身不构成二五八番；在这个限定版本下普通点炮条件未满足，自摸另论。",
+      "next_condition": "GET_VALID_FAN_OR_SELFDRAW",
+      "context": {
+        "open_melds": [
+          "P1,P1,P1"
+        ],
+        "bonus_flower": null,
+        "additional_fan": false
+      }
+    },
+    {
+      "id": "E06",
+      "profile_id": "HN_FAN_REFERENCE",
+      "title": "海南：东位春花算番，不等于当眼",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S3",
+        "S3"
+      ],
+      "status": "QUALIFIED_CONDITIONAL",
+      "explanation": "限定东位拿春花；春花是额外摆出的花牌，补花后仍用14张组成普通结构；本案例眼仍是三条一对。",
+      "next_condition": "FLOWER_ADDS_FAN_NOT_PAIR",
+      "context": {
+        "open_melds": [
+          "P1,P1,P1"
+        ],
+        "seat": "东",
+        "bonus_flower": "F1"
+      }
+    },
+    {
+      "id": "E07",
+      "profile_id": "HN_FAN_REFERENCE",
+      "title": "海南：非对应座位花牌不自动算番",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S3",
+        "S3"
+      ],
+      "status": "FAN_NOT_SHOWN",
+      "explanation": "南位拿春花时，这张花不按来源中“对应座位花牌”获得番；若没有其他番，不能据此宣称能点炮胡。",
+      "next_condition": "ASK_TABLE_RULE",
+      "context": {
+        "open_melds": [
+          "P1,P1,P1"
+        ],
+        "seat": "南",
+        "bonus_flower": "F1",
+        "additional_fan": false
+      }
+    },
+    {
+      "id": "E08",
+      "profile_id": "SC_BLOODBATTLE_REF",
+      "title": "四川：有三种花色，结构完整仍不能胡",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "VARIANT_GATE_FAILED",
+      "explanation": "尽管四组加一对成立，但手中同时含万、筒、条；在要求定缺的血战玩法中不满足缺门。",
+      "next_condition": "DISCARD_MISSING_SUIT",
+      "context": {
+        "declared_missing_suit": "S"
+      }
+    },
+    {
+      "id": "E09",
+      "profile_id": "SC_BLOODBATTLE_REF",
+      "title": "四川：只剩万和筒，已缺条",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "P2",
+        "P2"
+      ],
+      "status": "QUALIFIED_CONDITIONAL",
+      "explanation": "14张牌由四组和一对组成，整手只有万和筒；如果已经定缺条，满足“缺条”的结构条件，仍须核实选定玩法其他附加条件。",
+      "next_condition": "CHECK_VARIANT_OPTIONS",
+      "context": {
+        "declared_missing_suit": "S"
+      }
+    },
+    {
+      "id": "E10",
+      "profile_id": "SC_BLOODBATTLE_REF",
+      "title": "四川：七对特殊牌型参考",
+      "hand": [
+        "W1",
+        "W1",
+        "W2",
+        "W2",
+        "W4",
+        "W4",
+        "W5",
+        "W5",
+        "W7",
+        "W7",
+        "W8",
+        "W8",
+        "W9",
+        "W9"
+      ],
+      "status": "QUALIFIED_CONDITIONAL",
+      "explanation": "十四张构成七副对子；这副手牌不同时构成普通四组加一对，清楚展示七对属于另一类特殊牌型。仍须核实具体血战玩法是否支持七对。",
+      "next_condition": "CHECK_SEVEN_PAIRS_OPTION",
+      "context": {}
+    },
+    {
+      "id": "E11",
+      "profile_id": "GD_POOK_TDH",
+      "title": "广东推倒胡：结构完整，自摸可胡",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "QUALIFIED_CONDITIONAL",
+      "explanation": "在波克公布的推倒胡版本中，完成普通结构且为自己摸到最后一张时，满足列明的主要胡牌方式。",
+      "next_condition": "SELF_DRAW",
+      "context": {
+        "last_tile_source": "self_draw"
+      }
+    },
+    {
+      "id": "E12",
+      "profile_id": "GD_POOK_TDH",
+      "title": "广东推倒胡：普通点炮不胡",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "VARIANT_GATE_FAILED",
+      "explanation": "同样的14张完整结构，若最后一张来自别人普通打出的牌，该波克推倒胡版本只允许自摸或抢杠胡，普通点炮不算。",
+      "next_condition": "SELF_DRAW_OR_ROB_KONG",
+      "context": {
+        "last_tile_source": "ordinary_discard"
+      }
+    },
+    {
+      "id": "E13",
+      "profile_id": "MCR1998",
+      "title": "国标：清一色达到起和分",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "W1",
+        "W1",
+        "W1",
+        "W2",
+        "W2"
+      ],
+      "status": "QUALIFIED_CONDITIONAL",
+      "explanation": "仅万子，四组加一对，具有国标高番清一色；仍应按完整竞赛规定计分/确认听牌与和牌方式。",
+      "next_condition": "CHECK_COMPETITION_RULES",
+      "context": {}
+    },
+    {
+      "id": "E14",
+      "profile_id": "MCR1998",
+      "title": "国标：只有结构不等于达到8分",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "SCORE_REQUIRED",
+      "explanation": "这手牌结构完整，但仅凭牌形无法直接断定达到国标8分起和线；需要结合吃碰、门清、和牌方式及番种再算分。",
+      "next_condition": "CALCULATE_8_POINT_MINIMUM",
+      "context": {}
+    },
+    {
+      "id": "E15",
+      "profile_id": "CQ_BLOODBATTLE_EXAMPLE",
+      "title": "重庆参考版：须先确定换三张/定缺开关",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S2",
+        "S2"
+      ],
+      "status": "VARIANT_NOT_FIXED",
+      "explanation": "本例有三色；若采用已定缺的血战版本，则不能胡；若只是泛称“重庆麻将”而未选具体规则，不应自动作确定判定。",
+      "next_condition": "SELECT_EXPLICIT_VARIANT",
+      "context": {
+        "missing_suit_rule": "unknown"
+      }
+    },
+    {
+      "id": "E16",
+      "profile_id": "COMMON",
+      "title": "眼不是任意两张数字相近的牌",
+      "hand": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "P1",
+        "P1",
+        "P1",
+        "S3",
+        "S3"
+      ],
+      "status": "STRUCTURE_VALID",
+      "explanation": "末尾三条+三条为相同对子，是普通结构中的眼；眼的数字不一定只能是二五八，海南的二五八还涉及地方“有番”条件。",
+      "next_condition": "DISTINGUISH_PAIR_VS_FAN",
+      "context": {}
+    }
+  ]
+}

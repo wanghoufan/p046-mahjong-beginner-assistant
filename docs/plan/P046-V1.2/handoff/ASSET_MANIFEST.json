@@ -1,0 +1,262 @@
+{
+  "P046-云端产品最终交接-计划.md": {
+    "sha256": "54cb34e033bf81ed0ab03a59dc36887a46ab9daf965dc6858df8c6990f48e2b1",
+    "bytes": 19870
+  },
+  "README.md": {
+    "sha256": "404778373a94ceaf4509888547a1356a2951ccc3d23d37343ee687458c7f4fb6",
+    "bytes": 1746
+  },
+  "brand/android/res/drawable/ic_launcher_background.xml": {
+    "sha256": "be05269211e5b4b03afdb01261837428a1e28ad574ed55c179cf2a8e2cd67014",
+    "bytes": 170
+  },
+  "brand/android/res/drawable/p046_adaptive_fg.xml": {
+    "sha256": "80f20289c2b4ee81da80df157815238b10c0635bca4ee2eeaba5273d38ea148e",
+    "bytes": 2459
+  },
+  "brand/android/res/drawable/p046_adaptive_mono.xml": {
+    "sha256": "6d2ca6a0a776f8f8858b2ab698cb40b5c2dcc37e801fa71d4609bb38fb324ae7",
+    "bytes": 1957
+  },
+  "brand/android/res/drawable/p046_splash_icon.xml": {
+    "sha256": "80f20289c2b4ee81da80df157815238b10c0635bca4ee2eeaba5273d38ea148e",
+    "bytes": 2459
+  },
+  "brand/android/res/drawable-nodpi/ic_logo_foreground.png": {
+    "sha256": "2748e6208eb4979708edc9acc4530416205b3582fde4ed2679ecf8c1a4b60ac2",
+    "bytes": 3903
+  },
+  "brand/android/res/drawable-nodpi/ic_logo_monochrome.png": {
+    "sha256": "e512df6f264644e33f583b86d8eda92c83defe27a15041366b4555629599f6ea",
+    "bytes": 1372
+  },
+  "brand/android/res/mipmap-anydpi-v26/ic_launcher.xml": {
+    "sha256": "135778646d016f4a10779bc79031ae285c523ad494d941d3569d3c411ee36bd1",
+    "bytes": 313
+  },
+  "brand/android/res/values/p046_brand_colors.xml": {
+    "sha256": "71bdd3358f20b1b0a7ae1858c544443bd5cc94730f147aa7b18f15a944d482ec",
+    "bytes": 159
+  },
+  "brand/android/res/values-night/p046_brand_colors.xml": {
+    "sha256": "f748d7be599573d90a788ca7e9ce35f483976b714424ec422155dc332c6366f6",
+    "bytes": 159
+  },
+  "brand/icons/play-store-512.png": {
+    "sha256": "37ae6320a9be6552598bd845b446c931aad1702e7cdc953f2eaeaf2397ea68c6",
+    "bytes": 20479
+  },
+  "brand/previews/AI品牌概念图.png": {
+    "sha256": "27e9df828d20d903318c15c7700ee1e63bdf796e7f16150b864bc80b764b2827",
+    "bytes": 1830727
+  },
+  "brand/previews/splash-preview-dark.png": {
+    "sha256": "24b0a541606f387d72d2b6cb07dab9b1a24d679c06d6dffcd83f30287b27e115",
+    "bytes": 20814
+  },
+  "brand/previews/splash-preview-light.png": {
+    "sha256": "0e4580e21b9fdad80462b62d3be40c69b72367d380ca95fdb55c7832b0dbb785",
+    "bytes": 20315
+  },
+  "brand/previews/品牌与六屏展示概念图.png": {
+    "sha256": "cdbe5bed866c9d6c3b5f45b871f1db951f8bdbee4110fa948a38497d8c67bb5d",
+    "bytes": 2018606
+  },
+  "brand/品牌说明.md": {
+    "sha256": "1c52205600e8d7e31c1ce744fdcce7b7bd0ab8d59541720dff2d45ec3e7b9f4d",
+    "bytes": 2516
+  },
+  "examples/visual-examples.json": {
+    "sha256": "31b7494b76bb01fba4fa14035eb126d8de280db2085effa5ae54b010f1769dbb",
+    "bytes": 10943
+  },
+  "examples/示例预览.html": {
+    "sha256": "003f9d13b70f6b49e3168fc7460e991842a3b0775199b6fda8ff3decfcb628e3",
+    "bytes": 9239
+  },
+  "handoff/ORCA交接指令.txt": {
+    "sha256": "83393a2924c2f09b3f2ba472c355a0c65a6d38c43a3863efd986f4477191a889",
+    "bytes": 1421
+  },
+  "rules/rule-profiles.json": {
+    "sha256": "9933abb086ae33c51d3384e03b4bbb35ddfb9fecb0651a73803a6e414b9e6c9e",
+    "bytes": 4695
+  },
+  "rules/地区麻将规则研究-附件.md": {
+    "sha256": "cdc3e83266466035b0122e4dff60f8f1a282f29f3bff9128b557edaebb3ccba5",
+    "bytes": 7241
+  },
+  "tiles/png/F1.png": {
+    "sha256": "658f06192a8d0399798b52b1213f61b842ecca28b11d783920feb25dbbfadb55",
+    "bytes": 5575
+  },
+  "tiles/png/F2.png": {
+    "sha256": "2ab63efbe3208efd17051c8afd284835ac1ff6ba1911d48eed45156d1f97766c",
+    "bytes": 6212
+  },
+  "tiles/png/F3.png": {
+    "sha256": "dd749f7de4510fc8746363b84f330ac9d395cbb4efe7d3cd4230194f49518fed",
+    "bytes": 7750
+  },
+  "tiles/png/F4.png": {
+    "sha256": "23287d92107c9ebef3a779c2aeb3f465207405650485b09d54e6998b963a59d4",
+    "bytes": 8385
+  },
+  "tiles/png/F5.png": {
+    "sha256": "11efc786e9deb3668c091e386d98e1df0647d569c4027c8b0884b1a76c229f00",
+    "bytes": 6543
+  },
+  "tiles/png/F6.png": {
+    "sha256": "401cdfd71a84f2fc2e3396fcb29622e04d1382fd31990f9da909678e0ead8233",
+    "bytes": 4571
+  },
+  "tiles/png/F7.png": {
+    "sha256": "9c8904e9db47570f06019f45c2a96ed9b247843df1e280ede0084b002c7863c4",
+    "bytes": 5412
+  },
+  "tiles/png/F8.png": {
+    "sha256": "b8dbb1c27d242c8f0e7cdfaa8bc92beefef1fcec6a2eb454c97145d821c1e1f4",
+    "bytes": 6867
+  },
+  "tiles/png/P1.png": {
+    "sha256": "f1783028f3b9488edca2a54d79964665268f86b9ce621f0e42f2dde655baad4e",
+    "bytes": 1521
+  },
+  "tiles/png/P2.png": {
+    "sha256": "8397d1c55bd0bdd9cf0847726f399cbb9f7eb653b6a6cf9ae918b9631791eeca",
+    "bytes": 1485
+  },
+  "tiles/png/P3.png": {
+    "sha256": "c2a16a1bc89ed3a57c1ad82ee43e64f05ccd4c3b0906e8c92f57d3d4b496ec30",
+    "bytes": 1613
+  },
+  "tiles/png/P4.png": {
+    "sha256": "c68604e14957a913ea6de46cd0e3693c0f539732d044e2320c6634cf2b078279",
+    "bytes": 1841
+  },
+  "tiles/png/P5.png": {
+    "sha256": "412afed499670f2a1a352d0d12a05594c51d8b76c9d5dc579f33ea4fbbaf78a2",
+    "bytes": 2016
+  },
+  "tiles/png/P6.png": {
+    "sha256": "5d875ff72ebf81cff3daeab70a4fe37c5b8403b9a990a4211d44e47e7d7727f8",
+    "bytes": 2117
+  },
+  "tiles/png/P7.png": {
+    "sha256": "3c5e9fccb553e4871a270aadd6359904c4f4d834ef5d3233c0c380cc5a6ed143",
+    "bytes": 2336
+  },
+  "tiles/png/P8.png": {
+    "sha256": "9bd791e4da05ee892c40f20d4cf65ce0ad9f4998f04f4a13e89e05dfea614811",
+    "bytes": 2502
+  },
+  "tiles/png/P9.png": {
+    "sha256": "57f161544576b3bb3b24ab96b8a9bca7fd7f65670e475cc9f43aeabc8c93da13",
+    "bytes": 2606
+  },
+  "tiles/png/S1.png": {
+    "sha256": "abfafcadda1874e34f5ab3decb5be8000a7f95e94ad8855c77e7514638bfa9e5",
+    "bytes": 1104
+  },
+  "tiles/png/S2.png": {
+    "sha256": "ed6741ce503b27262274c7b2e5e07e9f5d8d0506182bab8a4bc19013e9b68eae",
+    "bytes": 1181
+  },
+  "tiles/png/S3.png": {
+    "sha256": "3eb9530209d734c3857811b73e250059390cd6d4e0cf83b545ebba0ca37afea9",
+    "bytes": 1172
+  },
+  "tiles/png/S4.png": {
+    "sha256": "c26d9323fa70398b4458acc4c0cd24b0e169505bc48be93da5ae8681bf1ea67e",
+    "bytes": 1276
+  },
+  "tiles/png/S5.png": {
+    "sha256": "81a033a7e523de81639ced18aa3123705fac787ec985f256ef9478e4e269901f",
+    "bytes": 1313
+  },
+  "tiles/png/S6.png": {
+    "sha256": "b6a0755d29add90d9fcdb2d502057e58ad87629d868734ff27a138b9f5359669",
+    "bytes": 1302
+  },
+  "tiles/png/S7.png": {
+    "sha256": "0804a3f918fc50c5857cf331432d59cbbf48800162471b6f0c2ed08ee28dbb90",
+    "bytes": 1381
+  },
+  "tiles/png/S8.png": {
+    "sha256": "cecd4858199200752312ea0003de1366a6e2814bb15aa47edd369e18eb0d730e",
+    "bytes": 1440
+  },
+  "tiles/png/S9.png": {
+    "sha256": "0411590a1c310f517072507d74d37e5235694d36c782ed119c408f5b50547079",
+    "bytes": 1424
+  },
+  "tiles/png/W1.png": {
+    "sha256": "22ab090d113ac2aa916849bb10604fcf644f9a2feaed566b2accf61422b04cef",
+    "bytes": 2594
+  },
+  "tiles/png/W2.png": {
+    "sha256": "6565f720058cc66c86e96acf9a2c0f4b01055bffb86bf75a94fe3f051f397bda",
+    "bytes": 2642
+  },
+  "tiles/png/W3.png": {
+    "sha256": "de5a407a733a5e6417b30bec9a40e3cd3583360f48f607062f63cfd9a07c9b88",
+    "bytes": 2681
+  },
+  "tiles/png/W4.png": {
+    "sha256": "5538937288ab2d385c793eb2a9aa9a3f52b8deeb4b042cd5440469c58798030f",
+    "bytes": 3633
+  },
+  "tiles/png/W5.png": {
+    "sha256": "d5cb9c67d4b760536251e1ee05f0c5dcc25fd0a0bfbd27ac43d3ce221a8395ee",
+    "bytes": 3232
+  },
+  "tiles/png/W6.png": {
+    "sha256": "cf662b2c20eabbf7c9fc400ed15172df69ff08c798010fd7fe24366eaa386961",
+    "bytes": 4104
+  },
+  "tiles/png/W7.png": {
+    "sha256": "330fc818ecefebf327fa8e2cafe19d950dad809321af8e4cffbc1ac0d570ef37",
+    "bytes": 3687
+  },
+  "tiles/png/W8.png": {
+    "sha256": "e2b2f94c91920acc54c0d39ef54818a9743c84e80a89335a678814503ddc29a3",
+    "bytes": 4370
+  },
+  "tiles/png/W9.png": {
+    "sha256": "cabc8c71a84303a1bf7bf2b4578d952cb83415cebe5ce409a00b477fa00e2e01",
+    "bytes": 3994
+  },
+  "tiles/png/Z1.png": {
+    "sha256": "73a3d9525b95ad770b7470fc57067c0206d0eedb8930f834c0ce03cc4f525c63",
+    "bytes": 4615
+  },
+  "tiles/png/Z2.png": {
+    "sha256": "0b65068c14df99261ebab6bbcd1caa49d01b233ba74ef65c439fa277cbcd89d7",
+    "bytes": 2803
+  },
+  "tiles/png/Z3.png": {
+    "sha256": "5ec30cb8667771bd76c206ed7d53418000db2fc7b8bf9650cb592b30f3dbf192",
+    "bytes": 2673
+  },
+  "tiles/png/Z4.png": {
+    "sha256": "8d1066e549c0eeea1117529eeb79bb04658f407b72928c95bada8b8c5ceecb9e",
+    "bytes": 3615
+  },
+  "tiles/png/Z5.png": {
+    "sha256": "49d4d367ef89fdf443756bb3a024cd59fefb1666786e1f485f2922035812662e",
+    "bytes": 1352
+  },
+  "tiles/png/Z6.png": {
+    "sha256": "87d0d4044ecdc4130acfdab7e7990de44d47075799fee0616dbae9bec89b9048",
+    "bytes": 7108
+  },
+  "tiles/png/Z7.png": {
+    "sha256": "5aa03d8b8b12c81bf54d598786bb3920431a70aca8c57ff5ee3bec81bcaeea64",
+    "bytes": 1758
+  },
+  "tiles/牌面图例.md": {
+    "sha256": "742399a489cbd5099508fafe6534090b3d72ff7e85003173b426b4d5f9032551",
+    "bytes": 527
+  }
+}

@@ -1,0 +1,426 @@
+/* P046 麻将小白助手 — 本地离线交互原型样式
+   语义 Token 直接取自 docs/pm/DESIGN_FREEZE_V1.0.draft.md §2（12+ 角色，浅/深两套）。
+   零外链：无 @import、无外部字体、无远程图片。 */
+
+:root {
+  --color-primary: #087454;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #A8EFCB;
+  --color-on-primary-container: #00210F;
+  --color-background: #F3F8F4;
+  --color-on-background: #10211C;
+  --color-surface: #FFFFFF;
+  --color-on-surface: #10211C;
+  --color-surface-variant: #DCE7DF;
+  --color-on-surface-variant: #414A45;
+  --color-outline: #717A74;
+  --color-can: #DCF2E6;
+  --color-on-can: #0B5A3C;
+  --color-cannot: #FCEBEA;
+  --color-on-cannot: #B3261E;
+  --color-conditional: #FBEFD3;
+  --color-on-conditional: #7A4E00;
+  --color-insufficient: #E7ECE8;
+  --color-on-insufficient: #4A5650;
+  --color-focus-ring: #087454;
+  --color-disabled-text: rgba(16, 33, 28, 0.38);
+  --color-disabled-bg: rgba(16, 33, 28, 0.12);
+  --color-pressed: rgba(8, 116, 84, 0.12);
+  --shadow-card: 0 1px 2px rgba(16, 33, 28, .06), 0 6px 18px rgba(16, 33, 28, .06);
+}
+
+[data-theme="dark"] {
+  --color-primary: #087454;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #0E3B2A;
+  --color-on-primary-container: #A8EFCB;
+  --color-background: #10211C;
+  --color-on-background: #E2EAE4;
+  --color-surface: #1A2B25;
+  --color-on-surface: #E2EAE4;
+  --color-surface-variant: #3F4A44;
+  --color-on-surface-variant: #BFC9C3;
+  --color-outline: #89938C;
+  --color-can: #0E3B2A;
+  --color-on-can: #7FD8AC;
+  --color-cannot: #521A17;
+  --color-on-cannot: #FFB4AB;
+  --color-conditional: #4A3400;
+  --color-on-conditional: #F5C451;
+  --color-insufficient: #29332D;
+  --color-on-insufficient: #C2CCC6;
+  --color-focus-ring: #7FD8AC;
+  --color-disabled-text: rgba(226, 234, 228, 0.38);
+  --color-disabled-bg: rgba(226, 234, 228, 0.12);
+  --shadow-card: 0 1px 2px rgba(0,0,0,.3), 0 8px 22px rgba(0,0,0,.28);
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--color-background);
+  color: var(--color-on-background);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; }
+
+.app { max-width: 720px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-surface-variant);
+}
+.topbar__title { flex: 1; font-weight: 600; font-size: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.iconbtn {
+  border: none; background: transparent; color: var(--color-on-surface);
+  width: 40px; height: 40px; border-radius: 20px; font-size: 18px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.iconbtn:hover { background: var(--color-pressed); }
+.iconbtn:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; }
+.iconbtn--hidden { visibility: hidden; }
+
+/* ---------- page ---------- */
+.page { flex: 1; padding: 14px 14px 40px; }
+.section-title { font-size: 18px; font-weight: 700; color: var(--color-on-surface-variant); margin: 22px 4px 10px; }
+
+/* ---------- splash ---------- */
+.splash {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  /* Freeze §4/§3: splash = solid light/dark background (#F3F8F4 / #10211C) + centred logo.
+     Both states come from the semantic background/on-background tokens, never a hardcoded hue. */
+  background: var(--color-background); color: var(--color-on-background); text-align: center; padding: 24px;
+}
+.splash__logo { width: 120px; height: 120px; border-radius: 26px; background: var(--color-primary-container); display: flex; align-items: center; justify-content: center; }
+.splash__logo img { width: 78px; height: 78px; object-fit: contain; }
+.splash__name { font-size: 22px; font-weight: 700; margin-top: 18px; }
+.splash__tag { font-size: 16px; opacity: .92; margin-top: 4px; }
+.splash__note { position: absolute; bottom: 26px; left: 16px; right: 16px; font-size: 16px; background: var(--color-surface); color: var(--color-on-surface); border: 1px solid var(--color-surface-variant); padding: 8px 12px; border-radius: 10px; line-height: 1.45; }
+
+/* ---------- brand header on home ---------- */
+.brand { display: flex; align-items: center; gap: 12px; padding: 8px 4px 4px; }
+.brand__logo { width: 52px; height: 52px; border-radius: 14px; background: var(--color-primary-container); display: flex; align-items: center; justify-content: center; flex: none; }
+.brand__logo img { width: 34px; height: 34px; object-fit: contain; }
+.brand__name { font-size: 20px; font-weight: 700; }
+.brand__tag { font-size: 16px; color: var(--color-on-surface-variant); }
+
+/* ---------- search ---------- */
+.searchbar { display: flex; align-items: center; gap: 8px; background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 14px; padding: 4px 12px; margin: 12px 0; }
+.searchbar input { flex: 1; border: none; background: transparent; color: var(--color-on-surface); font-size: 16px; padding: 9px 0; outline: none; }
+.searchbar:focus-within { border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-pressed); }
+.searchbar__icon { color: var(--color-on-surface-variant); }
+
+/* ---------- cards ---------- */
+.card { background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 16px; padding: 14px; box-shadow: var(--shadow-card); margin-bottom: 12px; }
+.card__title { font-weight: 700; font-size: 19px; margin: 0 0 6px; overflow-wrap: anywhere; }
+.card__sub { color: var(--color-on-surface-variant); font-size: 16px; }
+
+.entrygrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+.entrycard { text-align: left; border: 1px solid var(--color-surface-variant); background: var(--color-surface); border-radius: 18px; padding: 16px; cursor: pointer; box-shadow: var(--shadow-card); color: inherit; font: inherit; }
+.entrycard:hover { background: var(--color-pressed); }
+.entrycard:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; }
+.entrycard__emoji { font-size: 22px; }
+.entrycard__title { font-weight: 700; font-size: 17px; margin: 8px 0 4px; overflow-wrap: anywhere; }
+.entrycard__sub { color: var(--color-on-surface-variant); font-size: 16px; line-height: 1.5; }
+
+.regiongrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.regioncard { border: 1px solid var(--color-surface-variant); background: var(--color-surface); border-radius: 14px; padding: 12px; cursor: pointer; color: inherit; font: inherit; text-align: left; box-shadow: var(--shadow-card); }
+.regioncard:hover { background: var(--color-pressed); }
+.regioncard:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; }
+.regioncard__name { font-weight: 700; font-size: 16px; }
+
+.chiprow { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--color-outline); background: transparent; color: var(--color-on-surface); border-radius: 999px; padding: 7px 13px; cursor: pointer; font: inherit; font-size: 16px; }
+.chip:hover { background: var(--color-pressed); }
+.chip:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; }
+
+.bigbtn { display: block; width: 100%; text-align: center; border: none; border-radius: 14px; padding: 15px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.bigbtn--primary { background: var(--color-primary); color: var(--color-on-primary); }
+.bigbtn--ghost { background: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary); }
+.bigbtn:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; }
+
+/* ---------- tiles ---------- */
+.tiles { display: flex; flex-wrap: wrap; gap: 4px; }
+/* Tile face/border use the Freeze §2 semantic tokens (surface + surface-variant) so the
+   frame follows the light/dark theme instead of a hardcoded colour. */
+.tile { height: 60px; width: 43px; object-fit: contain; background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 6px; padding: 1px; }
+.tile--warn { border: 3px solid var(--color-on-cannot); box-shadow: 0 0 0 2px var(--color-cannot); }
+.tile--sm { height: 46px; width: 33px; }
+/* 花牌（春夏秋冬梅兰竹菊）：去掉牌图里的橙框，只留牌面 + 居中大字，字占牌面约九成。
+   牌面沿用 .tile 的 surface/outline 色，深浅色自动跟随，与其它牌面视觉一致。
+   各页面按自己的牌尺寸覆盖 font-size（见 c1/c2/c3、座次表、牌桌大屏）。 */
+.tile--text {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0; overflow: hidden; user-select: none;
+  font-weight: 800; line-height: 1; color: var(--color-primary);
+  font-size: 38px;
+}
+.flowerbox { border: 1px dashed var(--color-outline); border-radius: 12px; padding: 10px; margin-top: 10px; background: var(--color-surface-variant); }
+.flowerbox__label { font-size: 16px; font-weight: 700; color: var(--color-on-surface-variant); margin-bottom: 6px; }
+
+/* ---------- conclusion bars ---------- */
+.conclusion { border-radius: 12px; padding: 12px 14px; margin: 12px 0; font-weight: 700; display: flex; gap: 8px; align-items: flex-start; }
+.conclusion__icon { flex: none; }
+.conclusion--can { background: var(--color-can); color: var(--color-on-can); }
+.conclusion--cannot { background: var(--color-cannot); color: var(--color-on-cannot); }
+.conclusion--conditional { background: var(--color-conditional); color: var(--color-on-conditional); }
+.conclusion--insufficient { background: var(--color-insufficient); color: var(--color-on-insufficient); }
+
+/* ---------- key/value ---------- */
+.kv { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--color-surface-variant); font-size: 16px; }
+.kv:last-child { border-bottom: none; }
+.kv__k { flex: none; width: 92px; color: var(--color-on-surface-variant); font-weight: 600; }
+.kv__v { flex: 1; overflow-wrap: anywhere; }
+
+/* ---------- list ---------- */
+.listitem { display: block; width: 100%; text-align: left; background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 12px; padding: 12px 14px; margin-bottom: 9px; cursor: pointer; color: inherit; font: inherit; box-shadow: var(--shadow-card); }
+.listitem:hover { background: var(--color-pressed); }
+.listitem:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; }
+.listitem__title { font-weight: 700; overflow-wrap: anywhere; }
+.listitem__sub { font-size: 16px; color: var(--color-on-surface-variant); margin-top: 2px; }
+
+/* ---------- examples accordion (S7) ---------- */
+.example-item { background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 12px; margin-bottom: 9px; box-shadow: var(--shadow-card); overflow: hidden; }
+.example-item--open { border-color: var(--color-primary); }
+.example-head { display: flex; align-items: flex-start; gap: 8px; width: 100%; text-align: left; background: transparent; border: none; color: inherit; font: inherit; padding: 12px 14px; cursor: pointer; }
+.example-head:hover { background: var(--color-pressed); }
+.example-head:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: -3px; }
+.example-head__caret { flex: none; width: 14px; margin-top: 3px; text-align: left; color: var(--color-on-surface-variant); font-size: 16px; line-height: 1.4; }
+.example-item--open .example-head__caret { color: var(--color-primary); }
+.example-head__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.example-head__main .listitem__title { display: block; }
+.example-head__main .listitem__sub { display: block; margin-top: 2px; }
+.example-item--open .example-head__main .listitem__title { color: var(--color-primary); }
+.example-body { border-top: 1px solid var(--color-surface-variant); padding: 12px 14px 14px; }
+.example-body .card { border: none; box-shadow: none; background: transparent; border-radius: 0; padding: 0; margin: 0; }
+.example-body .card + .card { margin-top: 12px; }
+.example-body .section-title { margin: 14px 0 6px; }
+.example-body .notice { margin-top: 8px; }
+
+/* ---------- messages ---------- */
+.notice { background: var(--color-surface-variant); color: var(--color-on-surface-variant); border-radius: 12px; padding: 10px 12px; font-size: 16px; line-height: 1.55; }
+.simnote { background: var(--color-primary-container); color: var(--color-on-primary-container); border-radius: 12px; padding: 10px 12px; font-size: 16px; line-height: 1.55; }
+.graycard { background: var(--color-insufficient); color: var(--color-on-insufficient); border-radius: 14px; padding: 14px; margin: 12px 0; }
+.graycard__title { font-weight: 700; margin-bottom: 4px; }
+
+/* ---------- settings ---------- */
+.seg { display: flex; flex-direction: column; gap: 8px; }
+.radio { display: flex; align-items: center; gap: 10px; border: 1px solid var(--color-surface-variant); background: var(--color-surface); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: inherit; text-align: left; }
+.radio:hover { background: var(--color-pressed); }
+.radio:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; }
+.radio--active { border-color: var(--color-primary); border-width: 2px; }
+.radio__dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--color-outline); flex: none; }
+.radio--active .radio__dot { border-color: var(--color-primary); background: radial-gradient(circle, var(--color-primary) 0 45%, transparent 50%); }
+.radio__label { flex: 1; }
+.radio__code { font-size: 16px; color: var(--color-on-surface-variant); }
+
+/* ---------- compare table ---------- */
+.ctable { width: 100%; border-collapse: collapse; font-size: 16px; }
+.ctable th, .ctable td { border: 1px solid var(--color-surface-variant); padding: 8px 10px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.ctable th { background: var(--color-surface-variant); font-weight: 700; }
+.ctable .diff { background: var(--color-conditional); color: var(--color-on-conditional); font-weight: 700; }
+
+/* ---------- misc ---------- */
+.small { font-size: 16px; color: var(--color-on-surface-variant); }
+.mt8 { margin-top: 8px; }
+.mt16 { margin-top: 16px; }
+.spacer { height: 8px; }
+a.srclink { color: var(--color-primary); overflow-wrap: anywhere; }
+a.srclink--off { color: var(--color-disabled-text); pointer-events: none; text-decoration: line-through; }
+.grade-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+/* ---------- question routing pages (S5 / qWin / qCantWin / qEye) ---------- */
+.section-hint { font-size: 16px; color: var(--color-on-surface-variant); margin: 4px 4px 10px; }
+/* 从属小标题：层级明确低于 .section-title，表示「这是上一节的例子」，不与章节并列编号。
+   左侧强调线 + 缩进 + 浅底，让「举例从属于规则」一眼可辨。 */
+.subsection-head {
+  margin: 26px 4px 8px;
+  padding: 9px 12px;
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-surface-variant);
+  border-radius: 0 10px 10px 0;
+}
+.subsection-head__eyebrow { font-size: 16px; font-weight: 700; color: var(--color-primary); margin-bottom: 2px; }
+.subsection-head__title { font-size: 18px; font-weight: 700; color: var(--color-on-surface); }
+.subsection-body { margin-left: 4px; padding-left: 10px; border-left: 1px dashed var(--color-outline); }
+.sidebyside { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pairbox { border: 1px solid var(--color-surface-variant); border-radius: 12px; padding: 10px; background: var(--color-surface); }
+.pairbox__label { font-size: 16px; font-weight: 700; color: var(--color-on-surface-variant); margin-bottom: 6px; }
+.pairbox__label { overflow-wrap: anywhere; }
+/* 条件一：牌面 2/5/8 × 花色 万/筒/条 ＝ 9 组，固定三列铺开：
+   第一排万 2/5/8、第二排筒 2/5/8、第三排条 2/5/8。
+   手机竖屏只上下滑，不再横向滚动。 */
+.c1grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 8px; align-items: start; padding: 2px;
+}
+.c1grid .pairbox { min-width: 0; padding: 8px 4px; }
+.c1grid .pairbox__label { white-space: normal; overflow-wrap: anywhere; }
+.c1grid .tile { height: 48px; width: 34px; }
+.c1grid .tile--text { font-size: 30px; }
+/* 条件三：风牌 4 组 / 箭牌 3 组共 7 组牌图，分组标题仍在（风牌/箭牌）；
+   每组三张牌，两列铺开——窄屏只上下滑，不再横向滚动。 */
+.c1row__suit { font-size: 16px; font-weight: 700; color: var(--color-on-surface-variant); margin-bottom: 6px; }
+.c3group + .c3group { margin-top: 12px; }
+.c3grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 8px; align-items: start; padding: 2px;
+}
+.c3grid .pairbox { min-width: 0; padding: 8px 4px; }
+.c3grid .pairbox__label { white-space: normal; overflow-wrap: anywhere; }
+.c3grid .tile { height: 48px; width: 34px; }
+.c3grid .tile--text { font-size: 30px; }
+/* 条件二：四个位子 × 各自对应的花，一个位子一行（风牌＋两朵花），四行竖排；
+   窄屏只上下滑，不再横向滚动。 */
+.c2grid {
+  display: grid; grid-template-columns: 1fr; gap: 8px; padding: 2px;
+}
+.c2row {
+  width: 100%; max-width: none;
+  display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center;
+  padding: 8px 10px; border-radius: 10px;
+  border: 1px solid var(--color-surface-variant); background: var(--color-surface);
+}
+.c2row__seat { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.c2row__main { min-width: 0; }
+.c2row__name { font-size: 16px; font-weight: 700; overflow-wrap: anywhere; line-height: 1.4; }
+.c2row__flowers { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.c2flower { text-align: center; }
+.c2flower__name { font-size: 16px; color: var(--color-on-surface-variant); line-height: 1.3; overflow-wrap: anywhere; }
+.c2grid .tile { height: 48px; width: 34px; }
+.c2grid .tile--text { font-size: 30px; }
+/* 三个问题页的判例：默认全展开，无手风琴头、无收起。 */
+.example-flat { background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 12px; margin-bottom: 9px; box-shadow: var(--shadow-card); padding: 12px 14px 14px; }
+.example-flat .conclusion { margin-top: 0; }
+
+/* ---------- secondary "verify" disclosure ---------- */
+.meta { background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 12px; margin: 12px 0 0; box-shadow: var(--shadow-card); overflow: hidden; }
+.meta--open { border-color: var(--color-outline); }
+.meta__head { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; background: transparent; border: none; color: inherit; font: inherit; padding: 12px 14px; cursor: pointer; }
+.meta__head:hover { background: var(--color-pressed); }
+.meta__head:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: -3px; }
+.meta__caret { flex: none; width: 14px; text-align: left; color: var(--color-on-surface-variant); font-size: 16px; }
+.meta--open .meta__caret { color: var(--color-primary); }
+.meta__title { flex: 1; min-width: 0; font-size: 16px; font-weight: 600; color: var(--color-on-surface-variant); }
+.meta__body { border-top: 1px solid var(--color-surface-variant); padding: 10px 14px 12px; }
+.meta__body .kv { font-size: 16px; }
+.meta__body .kv:last-child { border-bottom: none; }
+
+/* ---------- seat table (座次表) ---------- */
+.seatlink { display: block; width: 100%; text-align: left; background: transparent; border: none; color: var(--color-primary); font: inherit; font-size: 16px; font-weight: 600; padding: 6px 0 2px; cursor: pointer; text-decoration: underline; }
+.seatlink:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; border-radius: 6px; }
+
+.roundtable { background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 16px; padding: 14px; box-shadow: var(--shadow-card); margin-bottom: 12px; }
+.roundtable__legend { text-align: center; margin-bottom: 10px; }
+.roundtable__grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.roundtable__center { grid-column: 2; grid-row: 2; border: 1px dashed var(--color-outline); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6px 4px; gap: 2px; min-height: 72px; }
+.roundtable__r { font-weight: 700; font-size: 16px; }
+.roundtable__hint { font-size: 16px; color: var(--color-on-surface-variant); line-height: 1.35; }
+
+.seat { border: 1px solid var(--color-surface-variant); background: var(--color-background); border-radius: 12px; padding: 8px 6px; text-align: center; min-height: 112px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
+/* 座位卡上的两朵生效花：跟着方位（庄家轮转）一起换，牌图缩小避免撑破 3 列网格。 */
+.seat__flowers { display: flex; gap: 3px; justify-content: center; margin-top: 3px; }
+.seat__flowers .tile--seatflower { height: 34px; width: 24px; border-radius: 4px; }
+.seat__flowers .tile--text { font-size: 20px; }
+.seat--n { grid-column: 2; grid-row: 1; }
+.seat--w { grid-column: 1; grid-row: 2; }
+.seat--e { grid-column: 3; grid-row: 2; }
+.seat--s { grid-column: 2; grid-row: 3; }
+.seat--dealer { border: 2px solid var(--color-primary); background: var(--color-primary-container); color: var(--color-on-primary-container); }
+.seat--pick { cursor: pointer; }
+.seat__wind { font-weight: 700; font-size: 16px; }
+.seat__tag { font-size: 16px; font-weight: 700; background: var(--color-primary); color: var(--color-on-primary); border-radius: 999px; padding: 1px 9px; line-height: 1.5; }
+.seat__name { width: 100%; font-size: 16px; font-family: inherit; color: var(--color-on-surface); background: var(--color-surface); border: 1px dashed var(--color-outline); border-radius: 8px; padding: 4px 4px; text-align: center; cursor: text; }
+.seat__name:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 1px; border-style: solid; }
+.seat__name--static { border: none; background: transparent; font-weight: 600; overflow-wrap: anywhere; }
+
+/* ---------- seat page (座次表) 大字加强；只作用于本页，别的页面不受影响 ---------- */
+.seatpage .seat { min-width: 0; }
+.seatpage .card__title { font-size: 24px; }
+.seatpage .roundtable__r { font-size: 24px; }
+.seatpage .roundtable__hint { font-size: 18px; }
+.seatpage .seat__wind { font-size: 26px; }
+.seatpage .seat__tag { font-size: 18px; }
+.seatpage .seat__name { font-size: 30px; min-width: 0; }
+.seatpage .bigbtn { font-size: 22px; }
+/* 花牌纯文字：去框，只留居中的大字。 */
+.seatpage .seat__flowers { gap: 14px; }
+.seatpage .seat__flowers .tile--seatflower.tile--text {
+  height: auto; width: auto; padding: 0; border: none; border-radius: 0;
+  background: transparent; box-shadow: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 44px; font-weight: 800; line-height: 1.2; color: var(--color-on-surface);
+}
+
+.bullets { list-style: none; margin: 0; padding: 0; }
+.bullets li { position: relative; padding: 7px 0 7px 18px; border-bottom: 1px dashed var(--color-surface-variant); font-size: 16px; }
+.bullets li:last-child { border-bottom: none; }
+.bullets li::before { content: "\2022"; position: absolute; left: 2px; top: 7px; color: var(--color-primary); font-weight: 700; }
+
+@media (max-width: 380px) {
+  .entrygrid, .regiongrid, .sidebyside { grid-template-columns: 1fr; }
+  .tile { height: 52px; width: 37px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .page { animation: fade .18s ease-out; }
+  @keyframes fade { from { opacity: .4; } to { opacity: 1; } }
+  .seat--flash { animation: seatflash .8s ease-in-out 2; }
+  @keyframes seatflash { 0%, 100% { box-shadow: 0 0 0 0 rgba(8, 116, 84, 0); } 50% { box-shadow: 0 0 0 7px rgba(8, 116, 84, .38); } }
+}
+
+/* ---------- PWA 安全区（viewport-fit=cover）；非刘海设备 env() 为 0，视觉不变 ---------- */
+.topbar { padding-top: calc(10px + env(safe-area-inset-top, 0px)); }
+.page { padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
+.splash__note { bottom: calc(26px + env(safe-area-inset-bottom, 0px)); }
+
+/* ================= 牌桌大屏（投屏用，一屏不滚） =================
+   .app--table 把整屏钉在 100dvh 并裁掉溢出；tpage 纵向 flex 三段：
+   局数行 / 2×2 四座（占满剩余）/「下一局」常驻底部。
+   字号用 clamp(vh) 随屏高伸缩，并在手机 360px 保证不横向溢出、不滚屏。 */
+.app--table { height: 100vh; height: 100dvh; max-height: 100vh; max-height: 100dvh; overflow: hidden; }
+.tpage {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--color-background);
+}
+.ttop {
+  flex: none; text-align: center; font-weight: 800;
+  font-size: clamp(22px, 3.6vh, 32px); line-height: 1.25;
+  color: var(--color-on-background); overflow-wrap: anywhere;
+}
+.tgrid {
+  flex: 1; min-height: 0;
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+  gap: 8px;
+}
+.tseat {
+  min-width: 0; min-height: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; padding: 6px 8px; text-align: center;
+  border: 1px solid var(--color-surface-variant); border-radius: 14px;
+  background: var(--color-surface); color: var(--color-on-surface);
+  font: inherit; cursor: pointer; overflow: hidden;
+}
+.tseat:hover { background: var(--color-pressed); }
+.tseat:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: -3px; }
+.tseat--dealer { border: 3px solid var(--color-primary); background: var(--color-primary-container); color: var(--color-on-primary-container); }
+.tseat__wind { font-weight: 800; font-size: clamp(24px, 4.4vh, 40px); line-height: 1.1; }
+.tseat__tag { font-size: clamp(16px, 1.9vh, 20px); font-weight: 800; background: var(--color-primary); color: var(--color-on-primary); border-radius: 999px; padding: 1px 12px; line-height: 1.5; }
+.tseat__name { font-weight: 800; font-size: clamp(28px, 6vh, 56px); line-height: 1.15; overflow-wrap: anywhere; max-width: 100%; }
+.tseat__flowers { display: flex; gap: 6px; justify-content: center; align-items: center; min-height: 0; }
+.tseat__flower.tile { height: clamp(56px, 11vh, 104px); width: auto; }
+/* 牌桌大屏的花牌同样是「牌面＋居中大字」，字随屏高缩放、占牌面约九成。 */
+.tseat__flower.tile--text { width: auto; padding: 0 .04em; font-size: clamp(52px, 10.4vh, 98px); }
+.tnext.bigbtn { flex: none; height: clamp(64px, 9vh, 84px); font-size: clamp(22px, 3vh, 30px); border-radius: 16px; display: flex; align-items: center; justify-content: center; }

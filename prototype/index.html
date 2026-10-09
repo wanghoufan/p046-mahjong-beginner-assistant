@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="海南麻将规则速查教学工具，牌面先行、一看就懂。">
+  <meta name="theme-color" content="#087454">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>麻将小白助手 · Mahjong Quick Guide</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- 启动画面（原型模拟）。文案由 app.js 按当前语言填充。 -->
+  <div id="splash" class="splash">
+    <div class="splash__logo"><img src="assets/brand/ic_logo_foreground.png" alt=""></div>
+    <div class="splash__name" id="splashName"></div>
+    <div class="splash__tag" id="splashTag"></div>
+    <div class="splash__note" id="splashNote"></div>
+  </div>
+
+  <!-- 应用根节点：所有屏幕由 app.js 渲染，无底部 Tab。 -->
+  <div id="app" class="app"></div>
+
+  <script src="data/rules.js"></script>
+  <script src="data/examples.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

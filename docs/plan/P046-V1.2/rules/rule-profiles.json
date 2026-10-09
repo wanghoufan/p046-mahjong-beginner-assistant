@@ -1,0 +1,153 @@
+{
+  "version": "1.2",
+  "date": "2026-10-09",
+  "profiles": [
+    {
+      "id": "MCR1998",
+      "name": "中国麻将竞赛规则（1998试行）",
+      "region": "全国（竞技竞赛版）",
+      "status": "DOCUMENTED_STANDARD",
+      "tile_count": 144,
+      "tile_family": [
+        "W",
+        "P",
+        "S",
+        "Z",
+        "F"
+      ],
+      "allow_chi": true,
+      "win_structure": "4组+1对或指定特殊牌型",
+      "win_gate": "牌型合法且达到8分起和（花牌分不计入）",
+      "source_ids": [
+        "R-NAT"
+      ],
+      "caveat": "不代表一般朋友聚会采用国标；不同赛事版本需另行核实"
+    },
+    {
+      "id": "HN_FAN_REFERENCE",
+      "name": "海南常见“有番”玩法（资料参考版）",
+      "region": "海南",
+      "status": "CROSS_REPORTED_NOT_UNIFIED",
+      "tile_count": 144,
+      "tile_family": [
+        "W",
+        "P",
+        "S",
+        "Z",
+        "F"
+      ],
+      "allow_chi": true,
+      "win_structure": "通常4组+1对，另有七对、十三幺等特殊牌型",
+      "win_gate": "常见说法：有番可点炮胡、无番可自摸；二五八做眼、座位对应花牌、特定风/箭牌刻子等可构成番",
+      "source_ids": [
+        "R-HN-PRIMARY",
+        "R-HN-CROSS",
+        "R-HN-ENCYC"
+      ],
+      "caveat": "不是覆盖海口、文昌、琼海等所有牌桌的官方统一标准。精确番种及胡法遵循桌规；“当花又当眼”术语证据不足，不作为可判定规则"
+    },
+    {
+      "id": "SC_BLOODBATTLE_REF",
+      "name": "四川血战到底（定缺·换三张可选参考）",
+      "region": "四川",
+      "status": "NAMED_VARIANT_CROSS_REPORTED",
+      "tile_count": 108,
+      "tile_family": [
+        "W",
+        "P",
+        "S"
+      ],
+      "allow_chi": false,
+      "win_structure": "4组+1对或部分特殊牌型如七对",
+      "win_gate": "必须无所选定缺花色；一人胡后其余继续，至三家胡或牌墙摸尽；换三张及结算细则以具体玩法为准",
+      "source_ids": [
+        "R-SC-GAME",
+        "R-SC-PLAY"
+      ],
+      "caveat": "血战与血流不同；换三张不能默认所有四川牌局都有；不同平台点炮/自摸选项可能不同"
+    },
+    {
+      "id": "CQ_BLOODBATTLE_EXAMPLE",
+      "name": "重庆血战麻将（某开发版本示例）",
+      "region": "重庆",
+      "status": "LOW_CONFIDENCE_VARIANT_OPTIONS",
+      "tile_count": 108,
+      "tile_family": [
+        "W",
+        "P",
+        "S"
+      ],
+      "allow_chi": false,
+      "win_structure": "常见4组+1对或七对",
+      "win_gate": "此版本有定缺和三家胡终局，换三张是开关项；精确点炮自摸选项依具体牌桌",
+      "source_ids": [
+        "R-CQ-DEV",
+        "R-CQ-COMM"
+      ],
+      "caveat": "未发现统一官方重庆麻将标准；本条仅作为可选择的参考玩法变体，不能宣称重庆全境都如此；涉及争议条款不展示确定能否胡"
+    },
+    {
+      "id": "GD_POOK_TDH",
+      "name": "广东推倒胡（波克游戏版）",
+      "region": "广东",
+      "status": "PUBLISHER_DOCUMENTED_VARIANT",
+      "tile_count": 136,
+      "tile_family": [
+        "W",
+        "P",
+        "S",
+        "Z"
+      ],
+      "allow_chi": false,
+      "win_structure": "4组+1对或七对等牌型",
+      "win_gate": "该游戏版本仅自摸或抢杠胡、不能吃；不允许普通点炮胡",
+      "source_ids": [
+        "R-GD-PUBLISHER",
+        "R-GD-JJ"
+      ],
+      "caveat": "广东还有鸡平胡、新章等；禁止把这套规则当作全广东统一规则"
+    }
+  ],
+  "sources": [
+    {
+      "id": "R-NAT",
+      "url": "https://zh.wikisource.org/zh/中国麻将竞赛规则"
+    },
+    {
+      "id": "R-HN-PRIMARY",
+      "url": "https://www.sohu.com/a/77655029_362100"
+    },
+    {
+      "id": "R-HN-CROSS",
+      "url": "https://www.sohu.com/a/355201965_120435448"
+    },
+    {
+      "id": "R-HN-ENCYC",
+      "url": "https://www.newton.com.tw/wiki/海南麻將"
+    },
+    {
+      "id": "R-SC-GAME",
+      "url": "https://doublewin.me/guides/mahjong-xuezhandaodi"
+    },
+    {
+      "id": "R-SC-PLAY",
+      "url": "https://play.google.com/store/apps/details?id=com.sichuanmj.app"
+    },
+    {
+      "id": "R-GD-PUBLISHER",
+      "url": "https://www.pook.com/games/gdtdh.html"
+    },
+    {
+      "id": "R-GD-JJ",
+      "url": "https://www.jj.cn/news/320/20111025103000019369.shtml"
+    },
+    {
+      "id": "R-CQ-DEV",
+      "url": "https://mdgsf.github.io/2017/08/16/vk-chongqingMJ/"
+    },
+    {
+      "id": "R-CQ-COMM",
+      "url": "https://jingyan.baidu.com/article/455a9950e94ee3a1662778ce.html"
+    }
+  ]
+}

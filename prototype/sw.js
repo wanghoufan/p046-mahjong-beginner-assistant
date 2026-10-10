@@ -3,7 +3,7 @@
    静态资源 cache-first。仅处理同源 GET；跨域与写请求一律放行不拦截。 */
 "use strict";
 
-var SW_VERSION = "p046-v4";
+var SW_VERSION = "p046-v8";
 var CACHE_NAME = "p046-" + SW_VERSION;
 
 var PRECACHE = [

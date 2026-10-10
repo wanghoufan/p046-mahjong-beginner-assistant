@@ -183,8 +183,8 @@ window.P046_I18N = {
       fanUseLabel: "番有什么用",
       fanUseText: "它决定你能不能胡、能不能接别人的牌：有番，别人打出来的要牌你也能胡（点炮胡）；没番，只能等自己摸到最后一张（自摸）。胡了以后，番也用来算这手牌算多少分。",
       fanFromLabel: "番怎么来",
-      fanFromText: "常见这几种算一种番：眼是二、五、八；东位认春、梅，南位认夏、兰，西位认秋、竹，北位认冬、菊；手里有风牌（东、南、西、北）或箭牌（中、发、白）三张相同。",
-      fanTilesLabel: "例：手里凑齐三张东，就是一种番",
+      fanFromText: "常见这几种算一种番：眼是二、五、八；东位认春、梅，南位认夏、兰，西位认秋、竹，北位认冬、菊；凑齐三张跟自己位子对应的风牌（东位三个东、南位三个南…）；或三张一样的箭牌（中、发、白）。",
+      fanTilesLabel: "例：东位凑齐三张东，就是一种番",
       fanBoundary: "各桌对番种和算法的规定可能不一样，以你们那桌为准。",
       condTitle: "四、满足哪几个条件就能胡",
       condScope: "结构摆对之后，还要看下面这四条：",
@@ -205,13 +205,13 @@ window.P046_I18N = {
       c2Text: "这一条讲的是「你坐哪个位子，摸到哪朵花才算数」。桌上有四个位子（东、南、西、北），花牌一共八朵（春、夏、秋、冬、梅、兰、竹、菊）；常见玩法里，每个位子对上其中两朵，对应关系如下：",
       c2Label: "四个位子，各认哪几朵花",
       c2Note: "花是额外摆出来的，不占手里的那一对，也不能当眼；它给的是一种番。",
-      c3Title: "条件三 · 风牌或箭牌，凑成三张一样",
-      c3Text: "风牌 ＝ 东、南、西、北这四张；箭牌 ＝ 中、发、白这三张。一共 7 种，其中三张完全一样就算一条：",
-      c3WindTitle: "风牌（东、南、西、北）",
-      c3DragonTitle: "箭牌（中、发、白）",
-      c3Label1: "三个东", c3Label2: "三个南", c3Label3: "三个西", c3Label4: "三个北",
-      c3Label5: "三个中", c3Label6: "三个发", c3Label7: "三个白",
-      c3Note: "三张完全一样的一组，就叫刻子。",
+      c3Title: "条件三 · 你坐的位子，拿到对应的风牌",
+      c3Text: "风牌 ＝ 东、南、西、北这四张。和花牌一样，风牌也认位子：你坐在哪个位子，就要凑齐三张跟这个位子对应的风牌，其它位子的风牌不算。",
+      c3WindTitle: "四个位子，各要哪三张风牌",
+      c3WindNote: "东位（庄家位）要三个东，南位要三个南，西位要三个西，北位要三个北；三张完全一样的一组，叫刻子。",
+      c3DragonTitle: "另外：箭牌（中、发、白）不认位子",
+      c3DragonLabel1: "三个中", c3DragonLabel2: "三个发", c3DragonLabel3: "三个白",
+      c3Note: "箭牌跟坐哪个位子无关，三张完全一样就算一条。",
       c4Title: "条件四 · 有番能点炮胡，没番只能自摸",
       c4Text: "这里说的「番」，就是前面那一节讲的番。同一手牌，有番没番，能胡的方式不一样：",
       dianpaoText: "点炮胡 ＝ 别人打出你要的那张牌，你就胡了。",
@@ -228,7 +228,7 @@ window.P046_I18N = {
       intro: "先记住一句：番不是牌面结构，而是「牌摆对之外，额外满足的条件」。",
       whatTitle: "一、番是什么",
       whatText: "番 ＝ 你这手牌除了牌面结构之外，额外满足的一个条件。摆好四组＋一对只是基础；多满足一条，就多一种番。",
-      whatTilesLabel: "例：手里凑齐三张东，就是一种番",
+      whatTilesLabel: "例：东位凑齐三张东，就是一种番",
       useTitle: "二、番有什么用",
       useText: "番决定你能不能胡、能不能接别人的牌：",
       useYesLabel: "有番",
@@ -240,7 +240,7 @@ window.P046_I18N = {
       fromText: "常见这几种算一种番：",
       from1: "眼是二、五、八（万、筒、条都算）；",
       from2: "东位认春、梅，南位认夏、兰，西位认秋、竹，北位认冬、菊；",
-      from3: "手里有风牌（东、南、西、北）或箭牌（中、发、白）三张相同。"
+      from3: "凑齐三张跟自己位子对应的风牌（东位三个东、南位三个南，依此类推）；或三张一样的箭牌（中、发、白）。"
     },
     qcant: {
       baseTitle: "先看基础：13 张与 14 张的区别",
@@ -268,7 +268,7 @@ window.P046_I18N = {
       HN_FAN_REFERENCE: {
         name: "海南常见“有番”玩法", short_name: "海南麻将", region: "海南",
         win_structure: "通常4组+1对，另有七对、十三幺等特殊牌型",
-        win_gate: "常见说法：有番可点炮胡、无番可自摸；二五八做眼、座位对应花牌、特定风/箭牌刻子等可构成番",
+        win_gate: "常见说法：有番可点炮胡、无番可自摸；二五八做眼、座位对应花牌、座位对应风牌刻子、中发白刻等可构成番",
         caveat: "不是覆盖海口、文昌、琼海等所有牌桌的官方统一标准。精确番种及胡法遵循桌规；“当花又当眼”术语证据不足，不作为可判定规则"
       }
     },
@@ -290,7 +290,7 @@ window.P046_I18N = {
         lines: [
           "番是什么：番 ＝ 你这手牌除了牌面结构之外，额外满足的一个条件。摆好四组＋一对只是基础；多满足一条，就多一种番。",
           "番有什么用：有番 —— 别人打出来的那张要牌，你也能胡（这叫点炮胡）；没番 —— 只能等自己摸到最后一张（这叫自摸）。胡了以后，番也用来算这手牌算多少分（番越多，一般分越高）。",
-          "番怎么来：常见这几种算一种番 —— 眼是二、五、八／东位认春、梅，南位认夏、兰，西位认秋、竹，北位认冬、菊／手里有风牌（东、南、西、北）或箭牌（中、发、白）三张相同。"
+          "番怎么来：常见这几种算一种番 —— 眼是二、五、八／东位认春、梅，南位认夏、兰，西位认秋、竹，北位认冬、菊／凑齐三张跟自己位子对应的风牌（东位三个东、南位三个南，依此类推）／三张一样的箭牌（中、发、白）。"
         ]
       },
       flowerEye: { name: "当花又当眼", desc: "这个说法我们没查到可靠来源，不乱讲。", unverified: true, tiles: ["F1"], pair: ["S3", "S3"] },
@@ -539,8 +539,8 @@ window.P046_I18N = {
       fanUseLabel: "What a fan does",
       fanUseText: "It decides whether you can win and whether you can take another player's tile: with a fan you can also win on the tile someone throws (a discard win); without a fan you can only wait to draw the last tile yourself (a self-draw). After you win, fans also set the hand's score.",
       fanFromLabel: "Where fans come from",
-      fanFromText: "Commonly, any of these counts as a fan: the eye is a 2, 5 or 8; you hold the flower matching your seat; you hold three identical wind tiles (East/South/West/North) or dragon tiles (Red/Green/White).",
-      fanTilesLabel: "Example: three East tiles in hand is one fan",
+      fanFromText: "Commonly, any of these counts as a fan: the eye is a 2, 5 or 8; you hold the flower matching your seat; you hold three winds matching your own seat (East seat three Easts, South seat three Souths, and so on); or three identical dragon tiles (Red/Green/White).",
+      fanTilesLabel: "Example: the East seat collecting three Easts is one fan",
       fanBoundary: "Tables can differ on which fans count and how they score — your table's rule has the final word.",
       condTitle: "4. Which conditions let you win",
       condScope: "Shape built — then these four conditions:",
@@ -561,13 +561,13 @@ window.P046_I18N = {
       c2Text: "This condition is about which seat you sit in and which flower counts. The table has four seats (East, South, West, North) and there are eight flower tiles in all (Spring / Summer / Autumn / Winter, Plum / Orchid / Bamboo / Chrysanthemum); in the common account each seat matches two of them, as follows:",
       c2Label: "Four seats — which flowers each one counts",
       c2Note: "A flower is laid out separately, does not use your pair, and cannot be the eye; it gives you a fan.",
-      c3Title: "Condition 3 · Three identical wind or dragon tiles",
-      c3Text: "Wind tiles = East / South / West / North; dragon tiles = Red / Green / White — 7 kinds in total. Three identical tiles count as one:",
-      c3WindTitle: "Wind tiles (East / South / West / North)",
-      c3DragonTitle: "Dragon tiles (Red / Green / White)",
-      c3Label1: "Three Easts", c3Label2: "Three Souths", c3Label3: "Three Wests", c3Label4: "Three Norths",
-      c3Label5: "Three Red dragons", c3Label6: "Three Green dragons", c3Label7: "Three White dragons",
-      c3Note: "Three identical tiles are called a triplet.",
+      c3Title: "Condition 3 · The wind tiles that match your seat",
+      c3Text: "Wind tiles = East / South / West / North. Like the flowers, winds are seat-matched: whichever seat you sit in, you must collect three winds of that seat — winds of other seats do not count.",
+      c3WindTitle: "Four seats — which three winds each one needs",
+      c3WindNote: "The East seat (dealer seat) needs three Easts, South needs three Souths, West needs three Wests, North needs three Norths; three identical tiles are called a triplet.",
+      c3DragonTitle: "Also: dragon tiles (Red / Green / White) are not seat-matched",
+      c3DragonLabel1: "Three Red dragons", c3DragonLabel2: "Three Green dragons", c3DragonLabel3: "Three White dragons",
+      c3Note: "Dragons do not depend on your seat — any three identical dragons count as one.",
       c4Title: "Condition 4 · With a fan you can win on a discard; without one, only self-draw",
       c4Text: "Here \"fan\" is the one explained in the section above. Same hand, different fan — different ways to win:",
       dianpaoText: "Discard win = someone else throws the tile you need, and you win.",
@@ -584,7 +584,7 @@ window.P046_I18N = {
       intro: "Remember one line: a fan is not the tile shape — it is an extra condition met on top of it.",
       whatTitle: "1. What a fan is",
       whatText: "A fan = one extra condition your hand meets on top of its tile shape. Four sets + one pair is only the base; each extra condition met adds a fan.",
-      whatTilesLabel: "Example: three East tiles in hand is one fan",
+      whatTilesLabel: "Example: the East seat collecting three Easts is one fan",
       useTitle: "2. What a fan does",
       useText: "A fan decides whether you can win and whether you can take another player's tile:",
       useYesLabel: "With a fan",
@@ -596,7 +596,7 @@ window.P046_I18N = {
       fromText: "Commonly, any of these counts as a fan:",
       from1: "the eye is a 2, 5 or 8 (Wan, Dots and Bamboo all count);",
       from2: "East takes Spring and Plum, South takes Summer and Orchid, West takes Autumn and Bamboo, North takes Winter and Chrysanthemum;",
-      from3: "you hold three identical wind tiles (East/South/West/North) or dragon tiles (Red/Green/White)."
+      from3: "you hold three winds matching your own seat (East seat three Easts, South seat three Souths, and so on); or three identical dragon tiles (Red/Green/White)."
     },
     qcant: {
       baseTitle: "First, the basics: 13 tiles vs 14 tiles",
@@ -624,7 +624,7 @@ window.P046_I18N = {
       HN_FAN_REFERENCE: {
         name: "Hainan common 'with fan' variant", short_name: "Hainan Mahjong", region: "Hainan",
         win_structure: "Usually 4 sets + 1 pair, plus special shapes such as seven pairs and thirteen orphans",
-        win_gate: "Common account: with a fan you may win on a discard, without a fan you self-draw; a 2-5-8 eye, matching seat flower, or certain wind/dragon triplets form fans",
+        win_gate: "Common account: with a fan you may win on a discard, without a fan you self-draw; a 2-5-8 eye, a matching seat flower, a seat-matched wind triplet, or a dragon triplet form fans",
         caveat: "Not a unified standard across all Hainan tables. Exact fans follow the table rule; 'flower also as the eye' lacks evidence and is not a judgeable rule"
       }
     },
@@ -646,7 +646,7 @@ window.P046_I18N = {
         lines: [
           "What a fan is: a fan = one extra condition your hand meets on top of its tile shape. Four sets + one pair is only the base; each extra condition met adds a fan.",
           "What a fan does: with a fan — you can also win on the tile someone else throws (a discard win); without a fan — you can only wait until you draw the last tile yourself (a self-draw). After you win, fans also set how much the hand scores (more fans, usually a higher score).",
-          "Where fans come from: commonly, any of these counts as a fan — the eye is a 2, 5 or 8 / East takes Spring and Plum, South takes Summer and Orchid, West takes Autumn and Bamboo, North takes Winter and Chrysanthemum / you hold three identical wind tiles (East/South/West/North) or dragon tiles (Red/Green/White)."
+          "Where fans come from: commonly, any of these counts as a fan — the eye is a 2, 5 or 8 / East takes Spring and Plum, South takes Summer and Orchid, West takes Autumn and Bamboo, North takes Winter and Chrysanthemum / three winds matching your own seat (East seat three Easts, South seat three Souths, and so on) / three identical dragon tiles (Red/Green/White)."
         ]
       },
       flowerEye: { name: "'Flower also as the eye'", desc: "We could not find a reliable source for this claim, so we don't state it.", unverified: true, tiles: ["F1"], pair: ["S3", "S3"] },

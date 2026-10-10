@@ -269,10 +269,9 @@ a.srclink--off { color: var(--color-disabled-text); pointer-events: none; text-d
 .c1grid .pairbox__label { white-space: normal; overflow-wrap: anywhere; }
 .c1grid .tile { height: 48px; width: 34px; }
 .c1grid .tile--text { font-size: 30px; }
-/* 条件三：风牌 4 组 / 箭牌 3 组共 7 组牌图，分组标题仍在（风牌/箭牌）；
-   每组三张牌，两列铺开——窄屏只上下滑，不再横向滚动。 */
+/* 条件三：风牌那组改用「座位行」布局（复用 .c2grid/.c2row，见上），
+   这里只剩箭牌（中/发/白）三组，两列铺开——窄屏只上下滑，不再横向滚动。 */
 .c1row__suit { font-size: 16px; font-weight: 700; color: var(--color-on-surface-variant); margin-bottom: 6px; }
-.c3group + .c3group { margin-top: 12px; }
 .c3grid {
   display: grid; grid-template-columns: repeat(2, 1fr);
   gap: 8px; align-items: start; padding: 2px;
@@ -281,11 +280,15 @@ a.srclink--off { color: var(--color-disabled-text); pointer-events: none; text-d
 .c3grid .pairbox__label { white-space: normal; overflow-wrap: anywhere; }
 .c3grid .tile { height: 48px; width: 34px; }
 .c3grid .tile--text { font-size: 30px; }
-/* 条件二：四个位子 × 各自对应的花，一个位子一行（风牌＋两朵花），四行竖排；
-   窄屏只上下滑，不再横向滚动。 */
+/* 条件二/条件三共用的「座位行」：左列只放位子名（东位/南位/西位/北位），
+   右列放该位子要凑的牌（条件二是两朵花，条件三是三张风牌）。
+   四行竖排，窄屏只上下滑，不再横向滚动。 */
 .c2grid {
+  --seat-col-w: 5.5em;
   display: grid; grid-template-columns: 1fr; gap: 8px; padding: 2px;
 }
+/* 英文座位名更长（East seat / (dealer seat)），左列给宽一点，四条行仍对齐。 */
+html[lang="en"] .c2grid { --seat-col-w: 7.5em; }
 .c2row {
   width: 100%; max-width: none;
   display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center;
@@ -296,10 +299,14 @@ a.srclink--off { color: var(--color-disabled-text); pointer-events: none; text-d
 .c2row__main { min-width: 0; }
 .c2row__name { font-size: 16px; font-weight: 700; overflow-wrap: anywhere; line-height: 1.4; }
 .c2row__flowers { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
-.c2flower { text-align: center; }
-.c2flower__name { font-size: 16px; color: var(--color-on-surface-variant); line-height: 1.3; overflow-wrap: anywhere; }
 .c2grid .tile { height: 48px; width: 34px; }
 .c2grid .tile--text { font-size: 30px; }
+/* 座位行用 flex 让右侧的牌永不折行——窄屏时是左边的名字换行，而不是把牌挤成两行。
+   左列固定宽度，四条行右侧的牌才上下对齐（东位的副标「（庄家位）」另起一行占位）。 */
+.c2row--wind { display: flex; align-items: center; gap: 10px; }
+.c2row--wind .c2row__seat { flex: 0 0 auto; width: var(--seat-col-w); min-width: 0; }
+.c2row--wind .c2row__flowers { flex: 0 0 auto; }
+.c2row__dealer { display: block; }
 /* 三个问题页的判例：默认全展开，无手风琴头、无收起。 */
 .example-flat { background: var(--color-surface); border: 1px solid var(--color-surface-variant); border-radius: 12px; margin-bottom: 9px; box-shadow: var(--shadow-card); padding: 12px 14px 14px; }
 .example-flat .conclusion { margin-top: 0; }

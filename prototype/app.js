@@ -252,6 +252,12 @@
     return (pt && pt.short_name) || profText(p).name;
   }
   function seatLabel(code) { return (T().seats && T().seats[code]) || code; }
+  /* 座位行左列的名称：东位再带一行「（庄家位）」副标。
+     副标单独成行，配合 .c2row--wind 的固定列宽，四条行右侧的牌才能上下对齐。 */
+  function seatNameHtml(wind) {
+    return esc(seatLabel(wind)) +
+      (wind === "东" ? '<span class="c2row__dealer">' + esc(T().ui.seatAsDealer) + "</span>" : "");
+  }
   /* 大屏只用单字方位（东/南/西/北 · East/South/West/North），比座次表的「东位」更省空间、更远可辨。 */
   function tableWindChar(wind) { var w = T().tableWinds; return (w && w[wind]) || wind; }
   function suitLabel(code) { var s = T().suits; return (s && s[code]) || code; }
@@ -685,55 +691,57 @@
       '<div class="notice mt8">' + esc(t.qwin.c1Fan) + '</div>' +
     '</div>';
 
-    /* 条件二：四个位子 × 各自对应的花，一行一个位子全画出（四张风牌 ＋ 八朵花）。
+    /* 条件二：四个位子 × 各自对应的花，一行一个位子（左：位子名，右：该位子认的两朵花）。
+       与条件三同一行式样（.c2row--wind），左列只留「东位/南位/西位/北位」文字，不再画座位牌。
        对应关系取自 SEAT_FLOWERS，保证两处一致。 */
     var c2Rows = SEAT_FLOWERS.map(function (row) {
-      var seatName = seatLabel(row.wind) + (row.wind === "东" ? t.ui.seatAsDealer : "");
-      var flowerCells = row.flowers.map(function (code) {
-        var fn = (t.tileNames && t.tileNames.f && t.tileNames.f[code]) || tileAlt(code);
-        return '<div class="c2flower">' + tileImg(code) +
-          '<div class="c2flower__name">' + esc(fn) + '</div></div>';
-      }).join("");
-      return '<div class="c2row">' +
-        '<div class="c2row__seat">' + tileImg(row.windCode) +
+      return '<div class="c2row c2row--wind">' +
+        '<div class="c2row__seat">' +
           '<div class="c2row__main">' +
-            '<div class="c2row__name">' + esc(seatName) + '</div>' +
+            '<div class="c2row__name">' + seatNameHtml(row.wind) + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="c2row__flowers">' + flowerCells + '</div>' +
+        '<div class="c2row__flowers">' + tilesRow(row.flowers) + '</div>' +
       '</div>';
     }).join("");
 
     var cond2 = '<div class="card">' +
       '<div class="card__title">' + esc(t.qwin.c2Title) + '</div>' +
       '<div class="small mt8">' + esc(t.qwin.c2Text) + '</div>' +
-      '<div class="flowerbox">' +
-        '<div class="flowerbox__label">' + esc(t.qwin.c2Label) + '</div>' +
-        '<div class="c2grid">' + c2Rows + '</div>' +
-      '</div>' +
+      '<div class="c1row__suit mt8">' + esc(t.qwin.c2Label) + '</div>' +
+      '<div class="c2grid">' + c2Rows + '</div>' +
       '<div class="small mt8">' + esc(t.qwin.c2Note) + '</div>' +
     '</div>';
 
-    /* 条件三：风牌 4 组（东/南/西/北）＋ 箭牌 3 组（中/发/白）＝ 7 组，全部画出。
-       分组网格：风牌一组、箭牌一组，每组内最多 4 列 / 3 列，窄屏自动降列不横溢。 */
-    var C3_GROUPS = [
-      { titleKey: "c3WindTitle", codes: ["Z1", "Z2", "Z3", "Z4"], start: 1 },
-      { titleKey: "c3DragonTitle", codes: ["Z5", "Z6", "Z7"], start: 5 }
-    ];
-    var c3GroupsHtml = C3_GROUPS.map(function (g) {
-      var boxes = g.codes.map(function (code, i) {
-        return trioBox(t.qwin["c3Label" + (g.start + i)], [code, code, code], "");
-      }).join("");
-      return '<div class="c3group">' +
-        '<div class="c1row__suit">' + esc(t.qwin[g.titleKey]) + '</div>' +
-        '<div class="c3grid">' + boxes + '</div>' +
+    /* 条件三：风牌和花牌一样认位子——你坐哪个位子，就要凑齐三张该位子的风牌
+       （东位三个东、南位三个南、西位三个西、北位三个北），别的位子的风牌不算。
+       布局复用条件二的 c2row/c2grid（左：位子，右：该位子要凑的三张），两节视觉一致。
+       箭牌（中/发/白）不认位子，三张一样即可，另列一组。
+       依据 RESEARCH_REVIEW F3「座位对应风牌刻子」＋「中发白刻」。 */
+    var c3WindRows = SEAT_FLOWERS.map(function (row) {
+      return '<div class="c2row c2row--wind">' +
+        '<div class="c2row__seat">' +
+          '<div class="c2row__main">' +
+            '<div class="c2row__name">' + seatNameHtml(row.wind) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="c2row__flowers">' + tilesRow([row.windCode, row.windCode, row.windCode]) + '</div>' +
       '</div>';
+    }).join("");
+
+    var C3_DRAGONS = ["Z5", "Z6", "Z7"];
+    var c3DragonBoxes = C3_DRAGONS.map(function (code, i) {
+      return trioBox(t.qwin["c3DragonLabel" + (i + 1)], [code, code, code], "");
     }).join("");
 
     var cond3 = '<div class="card">' +
       '<div class="card__title">' + esc(t.qwin.c3Title) + '</div>' +
       '<div class="small mt8">' + esc(t.qwin.c3Text) + '</div>' +
-      '<div class="mt8">' + c3GroupsHtml + '</div>' +
+      '<div class="c1row__suit mt8">' + esc(t.qwin.c3WindTitle) + '</div>' +
+      '<div class="c2grid">' + c3WindRows + '</div>' +
+      '<div class="small mt8">' + esc(t.qwin.c3WindNote) + '</div>' +
+      '<div class="c1row__suit mt16">' + esc(t.qwin.c3DragonTitle) + '</div>' +
+      '<div class="c3grid mt8">' + c3DragonBoxes + '</div>' +
       '<div class="small mt8">' + esc(t.qwin.c3Note) + '</div>' +
     '</div>';
 

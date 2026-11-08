@@ -1,88 +1,66 @@
 # Mahjong Quick Guide 麻将小白助手
 
-[中文](./README.md)
+> Hainan mahjong's "when can I win" rules, broken into tile diagrams a complete beginner can follow at the table.
 
-A quick-reference guide to **Hainan mahjong** rules, built for people who have never played. Every rule comes with real tile faces, so you can pick it up before sitting down at the table.
+[简体中文](README.md) | English
 
-<p align="center">
-  <img src="docs/assets/readme/home.png" width="200" alt="Home: common questions and small tools">
-  <img src="docs/assets/readme/qwin.png" width="200" alt="When can I win: hand structure, the pair, fan and the four conditions, all with tile faces">
-  <img src="docs/assets/readme/seat.png" width="200" alt="Seat table: name the four seats, pick the dealer, rotate each round">
+<p>
+  <img src="docs/assets/readme/home.png" width="200" alt="Home: two common questions and the seat-table entry">
+  <img src="docs/assets/readme/qwin.png" width="200" alt="When can I win: four groups plus a pair, the eye and fan, and the four conditions, all with tile faces">
+  <img src="docs/assets/readme/seat.png" width="200" alt="Seat table: name four players, pick the dealer, rotate each round">
 </p>
 
-## What this is
+## What problem it solves
 
-A quick-reference teaching tool for **Hainan mahjong** rules, made for complete beginners.
+At your first table, a rulebook's "four groups and a pair", "eye", "fan", "win off a discard" and "self-draw" are all new words; after one explanation, they are gone again by the time you get home.
 
-It is not a full encyclopedia of scoring patterns. It answers the things that actually block you before your first game:
+This tool covers Hainan mahjong only and is not an encyclopedia of scoring patterns. It answers what actually blocks you before a game: when this hand can win, why it cannot, and what people mean by sequence, triplet, pung, chow, kong, ready hand and flower tile. Every rule comes with real tile faces, and each term is explained in plain language where it first appears.
 
-- **When can this hand win?**
-- **Why can't this hand win?**
-- What do people mean by *sequence*, *triplet*, *pung*, *chow*, *kong*, *ready hand* and *flower tile*?
+## Core capabilities
 
-Every rule is shown with **real tile faces**, and each term is explained in plain language the first time it appears.
+- **When can I win**: one page covering the winning shape (four groups + one pair), what the "eye" is, what "fan" does, and the four conditions common in Hainan play — the eye is a 2/5/8, your seat matches its flowers, your seat's wind forms a triplet, and with fan you may win off a discard while without fan you can only self-draw; each condition is shown with tiles.
+- **Why can't I win**: concrete hands explain what is missing, from the difference between 13 and 14 tiles to an invalid shape and unmet conditions.
+- **8 reviewed hands**: E01–E07 and E16, each with a can-win / cannot-win verdict, the reason, what is missing and the next step; flower tiles are shown separately, never mixed into the hand.
+- **Glossary**: 13 entries for sequence, triplet, pung, chow, kong, ready hand, flower tile, missing suit, eye, fan, seats and seat-to-flower mapping, each with real tile faces.
+- **Seat table**: enter four names, tap who is dealer, and see how east/south/west/north rotate each round; names, dealer, round and rotation direction are saved on the device.
+- **Table screen**: opened from the seat table, it shows the round, dealer and four seats large enough for the whole table to read.
+- **Chinese and English**: language can follow the system, falling back to Simplified Chinese when the system language is unsupported.
+- **Light / dark / follow system**: appearance can be switched and remembered without losing the current page.
+- **Installable and offline**: ships `manifest.webmanifest` and a Service Worker (current cache version `p046-v8`); once added to a phone's home screen it opens like an app and works offline.
 
-## What it does
+## Quick start
 
-| Feature | Description |
-|---|---|
-| When can I win | One page: the winning shape (four groups + one pair), what the "eye" (the pair) is, what "fan" does, and the four Hainan conditions — the pair is 2/5/8, your seat matches your flowers, winds or dragons form a triplet, and fan decides whether you can win off a discard |
-| Why can't I win | Walks through concrete hands: the difference between 13 and 14 tiles, an invalid shape, and unmet conditions |
-| 8 real hands | Each hand gets a can/cannot-win verdict, the reason, what it is missing, and the next step; flower tiles are kept apart from the hand |
-| Glossary | Sequence, triplet, pung, chow, kong, ready hand, flower tile, missing suit… each with real tile faces |
-| Seat table (tool) | Name the four seats, tap who is the dealer, and see how the winds rotate round by round |
-| Table screen (tool) | Cast seats and winds to a big screen so all four players can see |
-
-Plus:
-
-- **Bilingual** (Simplified Chinese / English), with a follow-system language option that falls back to Simplified Chinese.
-- **Light / dark / follow-system** themes; switching never loses the page you are on.
-- **Installable and offline**: add it to your phone's home screen and it opens like an app, even with no network.
-- **Zero dependencies, zero network calls**: plain static pages, no framework and no build step — you can open `index.html` by double-clicking it.
-
-## Getting Started
-
-### Option 1: open the hosted version (recommended, works on phones)
+Online (recommended; opens directly on a phone):
 
 <https://wanghoufan.github.io/p046-mahjong-beginner-assistant/>
 
-This address is more reachable than `*.vercel.app` on mainland China networks; a Vercel mirror stays at <https://p046-mahjong-guide.vercel.app/index.html>.
+Use the browser's "Add to Home Screen" on a phone to open it like an app afterwards.
 
-On a phone you can use "Add to Home Screen" and then open it like an app, offline included.
-
-### Option 2: run it locally
+Run locally:
 
 ```bash
 cd prototype
 python3 -m http.server 8080
-# then open http://localhost:8080/
 ```
 
-You can also double-click `prototype/index.html` (a `file://` page). All content still works; only offline caching and "install to desktop" need an `http(s)` origin.
+Then open <http://localhost:8080/>. You can also double-click `prototype/index.html` and open it over `file://`; the content still works, but offline caching and home-screen installation only work over `http(s)`.
 
-## Scope and limitations
+The project is a plain static site with no framework, no build step and no npm dependencies; `prototype/` itself is the complete deployable site.
 
-- Only **Hainan mahjong** is covered; other regional rule sets are not included in this version.
-- **Not a hand-evaluation engine**: it does not judge arbitrary hands live. It presents 8 reviewed static examples (E01–E07, E16).
-- Rules come from public sources and local play; tables differ, so **ask at your own table**. Sources and evidence grades are listed in the in-app "About" page.
-- No betting, scoring, or gambling features of any kind.
-- Tile images are PNG, so extreme zoom levels look soft.
+## Data and privacy
 
-## Technical notes
+- Rules, hands, terms and copy are static files inside the repository; the page makes no network requests at runtime (and does not rely on fetch/XHR under `file://`).
+- There are no accounts, logins, analytics or reporting; theme, language and seat-table content live only in the current browser's `localStorage` (keys `p046.theme`, `p046.lang`, `p046.seat`).
+- Rule sources and their evidence grades are listed on the in-page "About" screen for you to check.
+- The offline cache stores same-origin static assets only and caches no cross-origin content.
 
-- Plain static site: `index.html` + `app.js` + `app.css` + `i18n.js` + `data/*.js`. No framework, no build, no external links.
-- Data is duplicated on purpose: `data/rules.js` and `data/examples.js` are the runtime source, `data/*.json` the record source. Change both together and keep them JSON-equivalent.
-- PWA: `manifest.webmanifest` + `sw.js`; `SW_VERSION` controls the cache version, and the page reloads itself once a new version takes over.
-- Deployment: `prototype/` is a complete static site and can be hosted anywhere (this project uses Vercel).
+## Known limitations
 
-## Layout
-
-| Path | Contents |
-|---|---|
-| `prototype/` | The product itself: the runnable, installable, offline static site |
-| `docs/pm/` | Product plan, UX contract, design freeze draft |
-| `docs/qa/` | Product acceptance tracking matrix |
-| `docs/plan/` | Handoff package and brand assets |
-| `docs/handoff/` | Project status and handoff notes |
-
-> Files such as `AGENTS.md`, `docs/roles/` and `docs/sop/` at the repository root are development and governance conventions. They are unrelated to using the product and can be ignored.
+- Covers **Hainan mahjong** only; other regional variants are not included in this version.
+- **Not a hand evaluator**: it does not judge arbitrary hands in real time; it presents only the 8 reviewed static examples.
+- Tables in Hainan may play differently, so the page's wording defers to your table; rules with insufficient evidence, such as "a flower tile also serving as the eye", are not presented as decidable rules.
+- The product contains no betting, scoring or gambling features.
+- Tile faces are PNG images and blur at very high zoom.
+- The table screen only displays, sets the dealer and advances a round; it has no name input or direction setting — those happen in the seat table.
+- The repository provides no automated test scripts; existing acceptance records are under `docs/qa/`.
+- The UI is available in Simplified Chinese and English only.
